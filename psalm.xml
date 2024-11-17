@@ -27,5 +27,6 @@
 
         <InvalidStringClass errorLevel="info" />
         <MissingClassConstType errorLevel="info" />
+        <RiskyTruthyFalsyComparison errorLevel="info" />
     </issueHandlers>
 </psalm>
