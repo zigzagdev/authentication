@@ -184,6 +184,7 @@ class CookieAuthenticator extends AbstractAuthenticator implements PersistenceIn
      *
      * @param \ArrayAccess|array $identity Identity data.
      * @return string
+     * @throws \JsonException
      */
     protected function _createToken(ArrayAccess|array $identity): string
     {
@@ -192,8 +193,7 @@ class CookieAuthenticator extends AbstractAuthenticator implements PersistenceIn
 
         $usernameField = $this->getConfig('fields.username');
 
-        /** @var string */
-        return json_encode([$identity[$usernameField], $hash]);
+        return json_encode([$identity[$usernameField], $hash], JSON_THROW_ON_ERROR);
     }
 
     /**
