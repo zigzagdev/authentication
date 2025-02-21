@@ -11,14 +11,14 @@
    このプラグインは、 *本人確認* と *認証のみ* を行います。
    認可のための別のプラグインがあるかもしれません。
 -  セッションの自動チェックはありません。
-   セッションから実際のユーザデータを取得するには、 ``SessionAuthenticator`` を使用する必要があります。
+   セッションから実際のユーザーデータを取得するには、 ``SessionAuthenticator`` を使用する必要があります。
    設定したセッションキーにデータがあるかどうかをチェックして、それをIDオブジェクトに入れてくれます。
--  ユーザのデータは古いAuthComponentでは利用できなくなりましたが、
+-  ユーザーのデータは古いAuthComponentでは利用できなくなりましたが、
    request属性を使ってアクセスでき、
    identityオブジェクトにカプセル化されています: ``$request->getAttribute('authentication')->getIdentity();`` 。
    さらに, ``AuthenticationComponent`` の ``getIdentity()`` と ``getIdentityData()`` が使えます。
 -  認証処理のロジックは、認証と本人確認に分かれています。
-   認証機能はリクエストから認証情報を抽出し、識別子は認証情報を検証して一致するユーザを見つけます。
+   認証機能はリクエストから認証情報を抽出し、識別子は認証情報を検証して一致するユーザーを見つけます。
 -  DigestAuthenticateの名前がHttpDigestAuthenticatorに変更しました。
 -  BasicAuthenticateの名前がHttpBasicAuthenticatorに変更しました。
 
@@ -40,7 +40,7 @@
    例: (ORMテーブル, LDAP など) と識別されたユーザーデータを返します。
 
 これにより、必要に応じて識別ロジックを変更したり、
-複数のユーザデータソースを使用したりすることが容易になります。
+複数のユーザーデータソースを使用したりすることが容易になります。
 
 独自の識別子を実装したい場合は ``IdentifierInterface`` を実装しなければなりません。
 
@@ -170,7 +170,7 @@ AuthComponent の設定の移行
             return $this->redirect($target);
         }
 
-        // ユーザの送信と認証に失敗した場合にエラーを表示する
+        // ユーザーの送信と認証に失敗した場合にエラーを表示する
         if ($this->request->is(['post'])) {
             $this->Flash->error('ユーザー名またはパスワードが無効です');
         }
@@ -181,7 +181,7 @@ AuthComponent の設定の移行
 
 ミドルウェアを適用した後、``identity``リクエスト属性を使ってIDデータを利用することができます。
 これは今使っている ``$this->Auth->user()`` の呼び出しを置き換えるものです。
-現在のユーザが認証されていないか、提供された資格情報が無効な場合は、 ``identity`` が ``null`` になります。::
+現在のユーザーが認証されていないか、提供された資格情報が無効な場合は、 ``identity`` が ``null`` になります。::
 
    $user = $request->getAttribute('identity');
 
