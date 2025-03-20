@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace Authentication\Authenticator;
 
 use Cake\Http\Exception\HttpException;
+use function Cake\I18n\__d;
 
 /**
  * An exception for stateless authenticators when credentials are wrong/missing.

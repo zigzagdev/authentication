@@ -18,6 +18,7 @@ namespace Authentication\Authenticator;
 
 use Cake\Http\Exception\HttpException;
 use Throwable;
+use function Cake\I18n\__d;
 
 /**
  * An exception that signals that authentication was required but missing.
