@@ -57,9 +57,7 @@ Configure::write('App', [
 
 Cache::setConfig([
     '_cake_translations_' => [
-        'engine' => 'File',
-        'prefix' => 'cake_core_',
-        'serialize' => true,
+        'engine' => 'Array',
     ],
 ]);
 
