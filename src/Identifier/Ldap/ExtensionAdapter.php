@@ -184,7 +184,7 @@ class ExtensionAdapter implements AdapterInterface
             function ($errorNumber, $errorText): void {
                 throw new ErrorException($errorText);
             },
-            E_ALL
+            E_ALL,
         );
     }
 

@@ -76,7 +76,7 @@ class AuthenticationMiddlewareTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
         $handler = new TestRequestHandler();
 
@@ -96,7 +96,7 @@ class AuthenticationMiddlewareTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
         $handler = new TestRequestHandler();
 
@@ -153,7 +153,7 @@ class AuthenticationMiddlewareTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
         $handler = new TestRequestHandler();
 
@@ -213,7 +213,7 @@ class AuthenticationMiddlewareTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
         $handler = new TestRequestHandler();
 
@@ -241,7 +241,7 @@ class AuthenticationMiddlewareTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
         $handler = new TestRequestHandler();
 
@@ -266,7 +266,7 @@ class AuthenticationMiddlewareTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
         $this->service = new AuthenticationService([
             'identifiers' => [
@@ -303,7 +303,7 @@ class AuthenticationMiddlewareTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'invalid', 'password' => 'invalid']
+            ['username' => 'invalid', 'password' => 'invalid'],
         );
         $handler = new TestRequestHandler();
 
@@ -328,7 +328,7 @@ class AuthenticationMiddlewareTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath', 'SERVER_NAME' => 'localhost'],
             [],
-            ['username' => 'invalid', 'password' => 'invalid']
+            ['username' => 'invalid', 'password' => 'invalid'],
         );
         $handler = new TestRequestHandler();
 
@@ -360,7 +360,7 @@ class AuthenticationMiddlewareTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
         $handler = new TestRequestHandler(function ($request) {
             throw new UnauthenticatedException();
@@ -385,7 +385,7 @@ class AuthenticationMiddlewareTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
 
         $this->expectException(UnauthenticatedException::class);
@@ -408,7 +408,7 @@ class AuthenticationMiddlewareTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
         $handler = new TestRequestHandler(function ($request) {
             throw new UnauthenticatedException();
@@ -434,7 +434,7 @@ class AuthenticationMiddlewareTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
         $handler = new TestRequestHandler(function ($request) {
             throw new UnauthenticatedException();
@@ -462,7 +462,7 @@ class AuthenticationMiddlewareTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
         $handler = new TestRequestHandler(function ($request) {
             throw new UnauthenticatedException();
@@ -490,7 +490,7 @@ class AuthenticationMiddlewareTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
 
         $middleware = new AuthenticationMiddleware($this->service);
@@ -507,7 +507,7 @@ class AuthenticationMiddlewareTest extends TestCase
         $this->assertSame(302, $response->getStatusCode());
         $this->assertSame(
             '/users/login?hello=world&redirect=%2Ftestpath#frag',
-            $response->getHeaderLine('Location')
+            $response->getHeaderLine('Location'),
         );
         $this->assertSame('', (string)$response->getBody());
     }
@@ -524,7 +524,7 @@ class AuthenticationMiddlewareTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
         $request = $request->withAttribute('base', '/base');
         $handler = new TestRequestHandler(function ($request) {
@@ -553,7 +553,7 @@ class AuthenticationMiddlewareTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath', 'QUERY_STRING' => 'a=b&c=d'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
 
         $this->service->setConfig([
@@ -603,7 +603,7 @@ class AuthenticationMiddlewareTest extends TestCase
 
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/'],
-            ['token' => $token]
+            ['token' => $token],
         );
         $handler = new TestRequestHandler();
         $middleware = new AuthenticationMiddleware($this->service);
@@ -642,7 +642,7 @@ class AuthenticationMiddlewareTest extends TestCase
                 'username' => 'mariano',
                 'password' => 'password',
                 'remember_me' => true,
-            ]
+            ],
         );
 
         $handler = new TestRequestHandler();
@@ -658,7 +658,7 @@ class AuthenticationMiddlewareTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
         $handler = new TestRequestHandler();
 
@@ -674,7 +674,7 @@ class AuthenticationMiddlewareTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
         $handler = new TestRequestHandler();
 

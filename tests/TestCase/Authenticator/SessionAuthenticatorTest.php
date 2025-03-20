@@ -191,7 +191,7 @@ class SessionAuthenticatorTest extends TestCase
             ->expects($this->exactly(2))
             ->method('check')
             ->with(
-                ...self::withConsecutive(['Auth'], ['Auth'])
+                ...self::withConsecutive(['Auth'], ['Auth']),
             )
             ->willReturnOnConsecutiveCalls(false, true);
 
@@ -271,7 +271,7 @@ class SessionAuthenticatorTest extends TestCase
             ->expects($this->exactly(2))
             ->method('write')
             ->with(
-                ...self::withConsecutive(['AuthImpersonate', $impersonator], ['Auth', $impersonated])
+                ...self::withConsecutive(['AuthImpersonate', $impersonator], ['Auth', $impersonated]),
             );
 
         $result = $authenticator->impersonate($request, $response, $impersonator, $impersonated);
@@ -312,7 +312,7 @@ class SessionAuthenticatorTest extends TestCase
 
         $this->expectException(UnauthorizedException::class);
         $this->expectExceptionMessage(
-            'You are impersonating a user already. Stop the current impersonation before impersonating another user.'
+            'You are impersonating a user already. Stop the current impersonation before impersonating another user.',
         );
         $authenticator->impersonate($request, $response, $impersonator, $impersonated);
     }

@@ -60,7 +60,7 @@ class TokenAuthenticatorTest extends TestCase
         $this->request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
     }
 

@@ -35,7 +35,7 @@ interface ImpersonationInterface
         ServerRequestInterface $request,
         ResponseInterface $response,
         ArrayAccess $impersonator,
-        ArrayAccess $impersonated
+        ArrayAccess $impersonated,
     ): array;
 
     /**

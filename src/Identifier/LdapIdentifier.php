@@ -103,7 +103,7 @@ class LdapIdentifier extends AbstractIdentifier
         if (!is_callable($this->_config['bindDN'])) {
             throw new InvalidArgumentException(sprintf(
                 'The `bindDN` config is not a callable. Got `%s` instead.',
-                gettype($this->_config['bindDN'])
+                gettype($this->_config['bindDN']),
             ));
         }
         if (!isset($this->_config['host'])) {
@@ -126,7 +126,7 @@ class LdapIdentifier extends AbstractIdentifier
             if (!$class) {
                 throw new RuntimeException(sprintf(
                     'Could not find LDAP identfier named `%s`',
-                    $ldap
+                    $ldap,
                 ));
             }
             $ldap = new $class();
@@ -153,7 +153,7 @@ class LdapIdentifier extends AbstractIdentifier
         if ($isUsernameSet && $isPasswordSet) {
             return $this->_bindUser(
                 $credentials[$fields[self::CREDENTIAL_USERNAME]],
-                $credentials[$fields[self::CREDENTIAL_PASSWORD]]
+                $credentials[$fields[self::CREDENTIAL_PASSWORD]],
             );
         }
 
@@ -182,7 +182,7 @@ class LdapIdentifier extends AbstractIdentifier
         $this->_ldap->connect(
             $config['host'],
             $config['port'],
-            (array)$this->getConfig('options')
+            (array)$this->getConfig('options'),
         );
     }
 

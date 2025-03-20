@@ -49,7 +49,7 @@ class FormAuthenticatorTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
 
         $form = new FormAuthenticator($identifiers);
@@ -73,7 +73,7 @@ class FormAuthenticatorTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/users/does-not-match'],
             [],
-            []
+            [],
         );
 
         $form = new FormAuthenticator($identifiers);
@@ -99,7 +99,7 @@ class FormAuthenticatorTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/users/does-not-match'],
             [],
-            ['username' => '', 'password' => '']
+            ['username' => '', 'password' => ''],
         );
 
         $form = new FormAuthenticator($identifiers);
@@ -125,7 +125,7 @@ class FormAuthenticatorTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/users/does-not-match'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
 
         $form = new FormAuthenticator($identifiers, [
@@ -153,7 +153,7 @@ class FormAuthenticatorTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/users/does-not-match'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
 
         $form = new FormAuthenticator($identifiers, [
@@ -184,7 +184,7 @@ class FormAuthenticatorTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/users/login'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
         $request = $request->withAttribute('base', '/base');
 
@@ -213,7 +213,7 @@ class FormAuthenticatorTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/Users/login'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
 
         $form = new FormAuthenticator($identifiers, [
@@ -241,7 +241,7 @@ class FormAuthenticatorTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/de/users/login'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
 
         $form = new FormAuthenticator($identifiers, [
@@ -272,7 +272,7 @@ class FormAuthenticatorTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/users/login'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
         $request = $request->withAttribute('base', '/base');
 
@@ -301,7 +301,7 @@ class FormAuthenticatorTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/de/users/login'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
 
         $form = new FormAuthenticator($identifiers, [
@@ -334,7 +334,7 @@ class FormAuthenticatorTest extends TestCase
                 'REQUEST_URI' => '/de/users/login',
             ],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
 
         $form = new FormAuthenticator($identifiers, [
@@ -369,7 +369,7 @@ class FormAuthenticatorTest extends TestCase
                 'SERVER_NAME' => 'auth.localhost',
             ],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
 
         $form = new FormAuthenticator($identifiers, [
@@ -401,7 +401,7 @@ class FormAuthenticatorTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/users/login'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
 
         $form = new FormAuthenticator($identifiers, [
@@ -427,7 +427,7 @@ class FormAuthenticatorTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/users/login'],
             [],
-            ['email' => 'mariano@cakephp.org', 'secret' => 'password']
+            ['email' => 'mariano@cakephp.org', 'secret' => 'password'],
         );
 
         $form = new FormAuthenticator($identifiers, [
@@ -464,7 +464,7 @@ class FormAuthenticatorTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/users/login'],
             [],
-            ['id' => 1, 'username' => 'mariano', 'password' => 'password']
+            ['id' => 1, 'username' => 'mariano', 'password' => 'password'],
         );
 
         $form = new FormAuthenticator($identifiers, [
@@ -497,7 +497,7 @@ class FormAuthenticatorTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/users/login'],
             [],
-            ['id' => 1, 'username' => 'mariano', 'password' => 'password']
+            ['id' => 1, 'username' => 'mariano', 'password' => 'password'],
         );
 
         $form = new FormAuthenticator($identifiers, [
@@ -523,7 +523,7 @@ class FormAuthenticatorTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/users/login'],
             [],
-            ['id' => 1, 'username' => 'mariano', 'password' => 'password']
+            ['id' => 1, 'username' => 'mariano', 'password' => 'password'],
         );
 
         $form = new FormAuthenticator($identifiers, [
@@ -534,7 +534,7 @@ class FormAuthenticatorTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
             'The provided URL checker class `Authentication\Test\TestCase\Authenticator\FormAuthenticatorTest` ' .
-            'does not implement the `Authentication\UrlChecker\UrlCheckerInterface` interface.'
+            'does not implement the `Authentication\UrlChecker\UrlCheckerInterface` interface.',
         );
 
         $form->authenticate($request);

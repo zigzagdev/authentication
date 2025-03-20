@@ -35,7 +35,7 @@ class DefaultUrlCheckerTest extends TestCase
         $checker = new DefaultUrlChecker();
 
         $request = ServerRequestFactory::fromGlobals(
-            ['REQUEST_URI' => '/users/does-not-match']
+            ['REQUEST_URI' => '/users/does-not-match'],
         );
 
         $result = $checker->check($request, '/users/login');
@@ -51,7 +51,7 @@ class DefaultUrlCheckerTest extends TestCase
     {
         $checker = new DefaultUrlChecker();
         $request = ServerRequestFactory::fromGlobals(
-            ['REQUEST_URI' => '/users/login']
+            ['REQUEST_URI' => '/users/login'],
         );
         $result = $checker->check($request, '/users/login');
         $this->assertTrue($result);
@@ -72,7 +72,7 @@ class DefaultUrlCheckerTest extends TestCase
     {
         $checker = new DefaultUrlChecker();
         $request = ServerRequestFactory::fromGlobals(
-            ['REQUEST_URI' => '/users/login']
+            ['REQUEST_URI' => '/users/login'],
         );
 
         $result = $checker->check($request, [
@@ -91,7 +91,7 @@ class DefaultUrlCheckerTest extends TestCase
     {
         $checker = new DefaultUrlChecker();
         $request = ServerRequestFactory::fromGlobals(
-            ['REQUEST_URI' => '/en/users/login']
+            ['REQUEST_URI' => '/en/users/login'],
         );
 
         $result = $checker->check($request, '%^/[a-z]{2}/users/login/?$%', [
@@ -109,7 +109,7 @@ class DefaultUrlCheckerTest extends TestCase
     {
         $checker = new DefaultUrlChecker();
         $request = ServerRequestFactory::fromGlobals(
-            ['REQUEST_URI' => '/users/login']
+            ['REQUEST_URI' => '/users/login'],
         );
 
         $result = $checker->check($request, 'http://localhost/users/login', [
@@ -127,7 +127,7 @@ class DefaultUrlCheckerTest extends TestCase
     {
         $checker = new DefaultUrlChecker();
         $request = ServerRequestFactory::fromGlobals(
-            ['REQUEST_URI' => '/users/login']
+            ['REQUEST_URI' => '/users/login'],
         );
         $request = $request->withAttribute('base', '/base');
 

@@ -84,7 +84,7 @@ class JwtAuthenticator extends TokenAuthenticator
                 [
                     'message' => $e->getMessage(),
                     'exception' => $e,
-                ]
+                ],
             );
         }
 
@@ -155,7 +155,7 @@ class JwtAuthenticator extends TokenAuthenticator
 
             return JWT::decode(
                 $token,
-                $keySet
+                $keySet,
             );
         }
 

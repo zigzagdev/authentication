@@ -185,7 +185,7 @@ class HttpDigestAuthenticator extends HttpBasicAuthenticator
         return md5(
             $password .
             ':' . $digest['nonce'] . ':' . $digest['nc'] . ':' . $digest['cnonce'] . ':' . $digest['qop'] . ':' .
-            md5($method . ':' . $digest['uri'])
+            md5($method . ':' . $digest['uri']),
         );
     }
 

@@ -59,7 +59,7 @@ class AuthenticationMiddleware implements MiddlewareInterface
      */
     public function __construct(
         AuthenticationServiceInterface|AuthenticationServiceProviderInterface $subject,
-        ?ContainerInterface $container = null
+        ?ContainerInterface $container = null,
     ) {
         $this->subject = $subject;
         $this->container = $container;

@@ -95,7 +95,7 @@ class JwtAuthenticatorTest extends TestCase
     public function testAuthenticateViaHeaderToken()
     {
         $this->request = ServerRequestFactory::fromGlobals(
-            ['REQUEST_URI' => '/']
+            ['REQUEST_URI' => '/'],
         );
         $this->request = $this->request->withAddedHeader('Authorization', 'Bearer ' . $this->tokenHS256);
 
@@ -119,7 +119,7 @@ class JwtAuthenticatorTest extends TestCase
     {
         $this->request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/'],
-            ['token' => $this->tokenHS256]
+            ['token' => $this->tokenHS256],
         );
 
         $authenticator = new JwtAuthenticator($this->identifiers, [
@@ -142,7 +142,7 @@ class JwtAuthenticatorTest extends TestCase
     {
         $this->request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/'],
-            ['token' => $this->tokenHS256]
+            ['token' => $this->tokenHS256],
         );
 
         $this->identifiers = $this->createMock(IdentifierCollection::class);
@@ -181,7 +181,7 @@ class JwtAuthenticatorTest extends TestCase
     {
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/'],
-            ['token' => $this->tokenHS256]
+            ['token' => $this->tokenHS256],
         );
 
         $authenticator = $this->getMockBuilder(JwtAuthenticator::class)
@@ -212,7 +212,7 @@ class JwtAuthenticatorTest extends TestCase
     {
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/'],
-            ['token' => $this->tokenHS256]
+            ['token' => $this->tokenHS256],
         );
 
         $authenticator = $this->getMockBuilder(JwtAuthenticator::class)
@@ -238,7 +238,7 @@ class JwtAuthenticatorTest extends TestCase
     {
         $this->request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/'],
-            ['token' => 'should cause an exception']
+            ['token' => 'should cause an exception'],
         );
 
         $authenticator = new JwtAuthenticator($this->identifiers, [
@@ -264,7 +264,7 @@ class JwtAuthenticatorTest extends TestCase
     {
         $this->request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/'],
-            ['token' => $this->tokenHS256]
+            ['token' => $this->tokenHS256],
         );
 
         $authenticator = new JwtAuthenticator($this->identifiers, [
@@ -296,7 +296,7 @@ class JwtAuthenticatorTest extends TestCase
     {
         $this->request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/'],
-            ['token' => $this->tokenRS256]
+            ['token' => $this->tokenRS256],
         );
 
         $authenticator = new JwtAuthenticator($this->identifiers, [

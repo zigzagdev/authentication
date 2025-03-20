@@ -107,7 +107,7 @@ class HttpDigestAuthenticatorTest extends TestCase
     public function testAuthenticateNoData()
     {
         $request = ServerRequestFactory::fromGlobals(
-            ['REQUEST_URI' => '/posts/index']
+            ['REQUEST_URI' => '/posts/index'],
         );
 
         $result = $this->auth->authenticate($request);
@@ -125,7 +125,7 @@ class HttpDigestAuthenticatorTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/posts/index'],
             [],
-            []
+            [],
         );
 
         $digest = <<<DIGEST
@@ -168,7 +168,7 @@ DIGEST;
                 'REQUEST_URI' => '/dir/index.html',
                 'REQUEST_METHOD' => 'GET',
                 'PHP_AUTH_DIGEST' => $this->digestHeader($data),
-            ]
+            ],
         );
 
         $result = $this->auth->authenticate($request);
@@ -211,7 +211,7 @@ DIGEST;
                 'REQUEST_URI' => '/dir/index.html',
                 'REQUEST_METHOD' => 'GET',
                 'PHP_AUTH_DIGEST' => $this->digestHeader($data),
-            ]
+            ],
         );
 
         $result = $this->auth->authenticate($request);
@@ -242,7 +242,7 @@ DIGEST;
                 'REQUEST_URI' => '/dir/index.html',
                 'REQUEST_METHOD' => 'GET',
                 'PHP_AUTH_DIGEST' => $this->digestHeader($data),
-            ]
+            ],
         );
 
         $result = $this->auth->authenticate($request);
@@ -285,7 +285,7 @@ DIGEST;
     public function testUnauthorizedChallenge()
     {
         $request = ServerRequestFactory::fromGlobals(
-            ['REQUEST_URI' => '/posts/index', 'REQUEST_METHOD' => 'GET']
+            ['REQUEST_URI' => '/posts/index', 'REQUEST_METHOD' => 'GET'],
         );
 
         try {
@@ -296,7 +296,7 @@ DIGEST;
             $header = $e->getHeaders()['WWW-Authenticate'];
             $this->assertMatchesRegularExpression(
                 '/^Digest realm="localhost",qop="auth",nonce="[A-Za-z0-9=]+",opaque="123abc"$/',
-                $header
+                $header,
             );
         }
     }
@@ -328,7 +328,7 @@ DIGEST;
                 'REQUEST_URI' => '/posts/index',
                 'REQUEST_METHOD' => 'GET',
                 'PHP_AUTH_DIGEST' => $digest,
-            ]
+            ],
         );
 
         try {
@@ -339,7 +339,7 @@ DIGEST;
             $header = $e->getHeaders()['WWW-Authenticate'];
             $this->assertMatchesRegularExpression(
                 '/^Digest realm="localhost",qop="auth",nonce="[A-Za-z0-9=]+",opaque="123abc"$/',
-                $header
+                $header,
             );
         }
     }
