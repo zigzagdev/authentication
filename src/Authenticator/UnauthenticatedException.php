@@ -18,6 +18,7 @@ namespace Authentication\Authenticator;
 
 use Cake\Http\Exception\HttpException;
 use Throwable;
+use function Cake\I18n\__d;
 
 /**
  * An exception that signals that authentication was required but missing.
@@ -38,7 +39,7 @@ class UnauthenticatedException extends HttpException
     public function __construct(string $message = '', int $code = 401, ?Throwable $previous = null)
     {
         if (!$message) {
-            $message = 'Authentication is required to continue';
+            $message = __d('authentication', 'Authentication is required to continue');
         }
         parent::__construct($message, $code, $previous);
     }

@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace Authentication\Authenticator;
 
 use Cake\Http\Exception\HttpException;
+use function Cake\I18n\__d;
 
 /**
  * An exception for stateless authenticators when credentials are wrong/missing.
@@ -45,7 +46,7 @@ class AuthenticationRequiredException extends HttpException
      */
     public function __construct(array $headers, string $body = '', int $code = 401)
     {
-        parent::__construct('Authentication is required to continue', $code);
+        parent::__construct(__d('authentication', 'Authentication is required to continue'), $code);
         $this->headers = $headers;
         $this->body = $body;
     }

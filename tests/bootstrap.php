@@ -15,6 +15,7 @@ declare(strict_types=1);
  */
 
 use Authentication\Plugin as AuthenticationPlugin;
+use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Datasource\ConnectionManager;
@@ -51,6 +52,12 @@ Configure::write('App', [
     'paths' => [
         'plugins' => [ROOT . 'Plugin' . DS],
         'templates' => [ROOT . 'templates' . DS],
+    ],
+]);
+
+Cache::setConfig([
+    '_cake_translations_' => [
+        'engine' => 'Array',
     ],
 ]);
 
