@@ -7,9 +7,9 @@ répertoire ROOT de votre projet CakePHP (là où se trouve le fichier
 
 .. code-block:: bash
 
-    php composer.phar require "cakephp/authentication:^2.0"
+    php composer.phar require cakephp/authentication
 
-La version 2 du Plugin Authentication est compatible avec CakePHP 4.
+La version 3 du Plugin Authentication est compatible avec CakePHP 5.
 
 Chargez le plugin en ajoutant l'instruction suivante dans le fichier
 ``src/Application.php`` de votre projet::
@@ -26,7 +26,7 @@ Pour commencer
 ==============
 
 Le plugin d'authentification s'intègre dans votre application comme un
-`middleware <https://book.cakephp.org/4/en/controllers/middleware.html>`_. Il
+`middleware <https://book.cakephp.org/5/fr/controllers/middleware.html>`_. Il
 peut aussi être utilisé comme un composant pour faciliter l'accès sans
 authentification. Tout d'abord, mettons en place le middleware. Dans votre
 **src/Application.php**, ajoutez ce qui suit aux imports de la classe::
@@ -173,7 +173,7 @@ Ensuite, nous allons ajouter une action de connexion basique à votre
     {
         $result = $this->Authentication->getResult();
         // Si l'utilisateur est connecté, le renvoyer ailleurs
-        if ($result->isValid()) {
+        if ($result && $result->isValid()) {
             $target = $this->Authentication->getLoginRedirect() ?? '/home';
             return $this->redirect($target);
         }

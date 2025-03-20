@@ -56,7 +56,6 @@ class AuthenticationMiddleware implements MiddlewareInterface
      *
      * @param \Authentication\AuthenticationServiceInterface|\Authentication\AuthenticationServiceProviderInterface $subject Authentication service or application instance.
      * @param \Cake\Core\ContainerInterface|null $container The container instance from the application.
-     * @throws \InvalidArgumentException When invalid subject has been passed.
      */
     public function __construct(
         AuthenticationServiceInterface|AuthenticationServiceProviderInterface $subject,

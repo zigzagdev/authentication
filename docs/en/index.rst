@@ -165,7 +165,7 @@ like::
     {
         $result = $this->Authentication->getResult();
         // If the user is logged in send them away.
-        if ($result->isValid()) {
+        if ($result && $result->isValid()) {
             $target = $this->Authentication->getLoginRedirect() ?? '/home';
             return $this->redirect($target);
         }

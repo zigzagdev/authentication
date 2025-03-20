@@ -153,7 +153,7 @@ ORM resolverを使用するには ``composer.json`` ファイルの中に ``cake
        'resolver' => [
             // name: \Some\Other\Custom\Resolver::class フルのクラス名です。
            'className' => 'MyResolver',
-           // レゾルバのコンストラクタに追加のオプションを渡します。
+           // リゾルバのコンストラクタに追加のオプションを渡します。
            'option' => 'value'
        ]
    ]);
