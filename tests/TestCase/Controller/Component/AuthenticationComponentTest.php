@@ -92,7 +92,7 @@ class AuthenticationComponentTest extends TestCase
         $this->request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
     }
 
@@ -257,7 +257,7 @@ class AuthenticationComponentTest extends TestCase
         $this->assertSame(
             $this->identityData->username,
             $request->getSession()->read('Auth.username'),
-            'Session should be updated.'
+            'Session should be updated.',
         );
 
         // Replace the identity
@@ -269,7 +269,7 @@ class AuthenticationComponentTest extends TestCase
         $this->assertSame(
             $newIdentity->username,
             $request->getSession()->read('Auth.username'),
-            'Session should be updated.'
+            'Session should be updated.',
         );
     }
 
@@ -432,7 +432,7 @@ class AuthenticationComponentTest extends TestCase
         $this->assertSame(
             ['add', 'delete', 'index', 'view'],
             $controller->Authentication->getUnauthenticatedActions(),
-            'Should contain unique set.'
+            'Should contain unique set.',
         );
     }
 

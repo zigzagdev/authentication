@@ -90,7 +90,7 @@ class HttpBasicAuthenticatorTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             [
                 'REQUEST_URI' => '/posts/index',
-            ]
+            ],
         );
 
         $result = $this->auth->authenticate($request);
@@ -109,7 +109,7 @@ class HttpBasicAuthenticatorTest extends TestCase
             [
                 'REQUEST_URI' => '/posts/index',
                 'PHP_AUTH_PW' => 'foobar',
-            ]
+            ],
         );
 
         $result = $this->auth->authenticate($request);
@@ -128,7 +128,7 @@ class HttpBasicAuthenticatorTest extends TestCase
             [
                 'REQUEST_URI' => '/posts/index',
                 'PHP_AUTH_USER' => 'mariano',
-            ]
+            ],
         );
 
         $result = $this->auth->authenticate($request);
@@ -148,7 +148,7 @@ class HttpBasicAuthenticatorTest extends TestCase
                 'REQUEST_URI' => '/posts/index',
                 'PHP_AUTH_USER' => '> 1',
                 'PHP_AUTH_PW' => "' OR 1 = 1",
-            ]
+            ],
         );
 
         $result = $this->auth->authenticate($request);
@@ -179,7 +179,7 @@ class HttpBasicAuthenticatorTest extends TestCase
             [
                 'user' => '0',
                 'password' => 'password',
-            ]
+            ],
         );
 
         $expected = [
@@ -209,7 +209,7 @@ class HttpBasicAuthenticatorTest extends TestCase
             [
                 'REQUEST_URI' => '/posts/index',
                 'SERVER_NAME' => 'localhost',
-            ]
+            ],
         );
 
         try {
@@ -234,7 +234,7 @@ class HttpBasicAuthenticatorTest extends TestCase
                 'REQUEST_URI' => '/posts/index',
                 'PHP_AUTH_USER' => 'mariano',
                 'PHP_AUTH_PW' => 'password',
-            ]
+            ],
         );
 
         $result = $this->auth->authenticate($request);

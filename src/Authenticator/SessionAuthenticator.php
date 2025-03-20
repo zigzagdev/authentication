@@ -133,7 +133,7 @@ class SessionAuthenticator extends AbstractAuthenticator implements PersistenceI
         ServerRequestInterface $request,
         ResponseInterface $response,
         ArrayAccess $impersonator,
-        ArrayAccess $impersonated
+        ArrayAccess $impersonated,
     ): array {
         $sessionKey = $this->getConfig('sessionKey');
         $impersonateSessionKey = $this->getConfig('impersonateSessionKey');
@@ -142,7 +142,7 @@ class SessionAuthenticator extends AbstractAuthenticator implements PersistenceI
         if ($session->check($impersonateSessionKey)) {
             throw new UnauthorizedException(
                 'You are impersonating a user already. ' .
-                'Stop the current impersonation before impersonating another user.'
+                'Stop the current impersonation before impersonating another user.',
             );
         }
         $session->write($impersonateSessionKey, $impersonator);

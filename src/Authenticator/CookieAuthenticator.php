@@ -238,7 +238,7 @@ class CookieAuthenticator extends AbstractAuthenticator implements PersistenceIn
         return Cookie::create(
             $name,
             $value,
-            $options
+            $options,
         );
     }
 }

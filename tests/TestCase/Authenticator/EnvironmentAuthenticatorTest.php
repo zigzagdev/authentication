@@ -541,7 +541,7 @@ class EnvironmentAuthenticatorTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
             'The provided URL checker class `Authentication\Test\TestCase\Authenticator\EnvironmentAuthenticatorTest` ' .
-            'does not implement the `Authentication\UrlChecker\UrlCheckerInterface` interface.'
+            'does not implement the `Authentication\UrlChecker\UrlCheckerInterface` interface.',
         );
 
         $envAuth->authenticate($request);

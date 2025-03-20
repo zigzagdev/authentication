@@ -36,7 +36,7 @@ trait UrlCheckerTrait
         return $this->_getUrlChecker()->check(
             $request,
             $this->getConfig('loginUrl'),
-            (array)$this->getConfig('urlChecker')
+            (array)$this->getConfig('urlChecker'),
         );
     }
 
@@ -68,7 +68,7 @@ trait UrlCheckerTrait
             throw new RuntimeException(sprintf(
                 'The provided URL checker class `%s` does not implement the `%s` interface.',
                 $options['className'],
-                UrlCheckerInterface::class
+                UrlCheckerInterface::class,
             ));
         }
 

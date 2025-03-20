@@ -54,7 +54,7 @@ class TokenIdentifier extends AbstractIdentifier
         if ($this->getConfig('hashAlgorithm') !== null) {
             $credentials[$dataField] = Security::hash(
                 $credentials[$dataField],
-                $this->getConfig('hashAlgorithm')
+                $this->getConfig('hashAlgorithm'),
             );
         }
 

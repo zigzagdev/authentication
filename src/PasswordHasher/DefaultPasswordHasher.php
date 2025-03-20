@@ -48,7 +48,7 @@ class DefaultPasswordHasher extends AbstractPasswordHasher
         return password_hash(
             $password,
             $this->_config['hashType'],
-            $this->_config['hashOptions']
+            $this->_config['hashOptions'],
         );
     }
 

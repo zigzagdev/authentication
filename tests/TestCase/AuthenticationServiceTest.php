@@ -50,7 +50,7 @@ class AuthenticationServiceTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
 
         $service = new AuthenticationService([
@@ -239,7 +239,7 @@ class AuthenticationServiceTest extends TestCase
         ]);
 
         $request = ServerRequestFactory::fromGlobals(
-            ['REQUEST_URI' => '/']
+            ['REQUEST_URI' => '/'],
         );
         $response = new Response();
 
@@ -270,7 +270,7 @@ class AuthenticationServiceTest extends TestCase
         ]);
 
         $request = ServerRequestFactory::fromGlobals(
-            ['REQUEST_URI' => '/']
+            ['REQUEST_URI' => '/'],
         );
         $response = new Response();
 
@@ -301,7 +301,7 @@ class AuthenticationServiceTest extends TestCase
         ]);
 
         $request = ServerRequestFactory::fromGlobals(
-            ['REQUEST_URI' => '/']
+            ['REQUEST_URI' => '/'],
         );
         $response = new Response();
 
@@ -336,7 +336,7 @@ class AuthenticationServiceTest extends TestCase
         ]);
 
         $request = ServerRequestFactory::fromGlobals(
-            ['REQUEST_URI' => '/']
+            ['REQUEST_URI' => '/'],
         );
         $response = new Response();
 
@@ -371,7 +371,7 @@ class AuthenticationServiceTest extends TestCase
         ]);
 
         $request = ServerRequestFactory::fromGlobals(
-            ['REQUEST_URI' => '/']
+            ['REQUEST_URI' => '/'],
         );
 
         $response = new Response();
@@ -389,7 +389,7 @@ class AuthenticationServiceTest extends TestCase
 
         $this->assertSame(
             'florian',
-            $result['request']->getAttribute('session')->read('Auth.username')
+            $result['request']->getAttribute('session')->read('Auth.username'),
         );
 
         $identity = $result['request']->getAttribute('identity');
@@ -416,7 +416,7 @@ class AuthenticationServiceTest extends TestCase
         ]);
 
         $request = ServerRequestFactory::fromGlobals(
-            ['REQUEST_URI' => '/']
+            ['REQUEST_URI' => '/'],
         );
 
         $response = new Response();
@@ -435,7 +435,7 @@ class AuthenticationServiceTest extends TestCase
 
         $this->assertSame(
             'florian',
-            $result['request']->getAttribute('session')->read('Auth.username')
+            $result['request']->getAttribute('session')->read('Auth.username'),
         );
 
         $identity = $result['request']->getAttribute('customIdentity');
@@ -463,7 +463,7 @@ class AuthenticationServiceTest extends TestCase
         ]);
 
         $request = ServerRequestFactory::fromGlobals(
-            ['REQUEST_URI' => '/']
+            ['REQUEST_URI' => '/'],
         );
 
         $response = new Response();
@@ -483,7 +483,7 @@ class AuthenticationServiceTest extends TestCase
 
         $this->assertSame(
             'florian',
-            $result['request']->getAttribute('session')->read('Auth.username')
+            $result['request']->getAttribute('session')->read('Auth.username'),
         );
 
         $identity = $result['request']->getAttribute('customIdentity');
@@ -563,7 +563,7 @@ class AuthenticationServiceTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
 
         $service = new AuthenticationService([
@@ -596,7 +596,7 @@ class AuthenticationServiceTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
 
         $service = new AuthenticationService([
@@ -672,7 +672,7 @@ class AuthenticationServiceTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
 
         $callable = function () {
@@ -707,7 +707,7 @@ class AuthenticationServiceTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
 
         $service = new AuthenticationService([
@@ -794,7 +794,7 @@ class AuthenticationServiceTest extends TestCase
     {
         $service = new AuthenticationService();
         $request = ServerRequestFactory::fromGlobals(
-            ['REQUEST_URI' => '/secrets']
+            ['REQUEST_URI' => '/secrets'],
         );
         $service->setConfig('unauthenticatedRedirect', '/users/login');
         $this->assertSame('/users/login', $service->getUnauthenticatedRedirectUrl($request));
@@ -802,26 +802,26 @@ class AuthenticationServiceTest extends TestCase
         $service->setConfig('queryParam', 'redirect');
         $this->assertSame(
             '/users/login?redirect=%2Fsecrets',
-            $service->getUnauthenticatedRedirectUrl($request)
+            $service->getUnauthenticatedRedirectUrl($request),
         );
 
         $service->setConfig('unauthenticatedRedirect', '/users/login?foo=bar');
         $this->assertSame(
             '/users/login?foo=bar&redirect=%2Fsecrets',
-            $service->getUnauthenticatedRedirectUrl($request)
+            $service->getUnauthenticatedRedirectUrl($request),
         );
 
         $service->setConfig('unauthenticatedRedirect', '/users/login?foo=bar#fragment');
         $this->assertSame(
             '/users/login?foo=bar&redirect=%2Fsecrets#fragment',
-            $service->getUnauthenticatedRedirectUrl($request)
+            $service->getUnauthenticatedRedirectUrl($request),
         );
     }
 
     public function testGetUnauthenticatedRedirectUrlWithBasePath()
     {
         $request = ServerRequestFactory::fromGlobals(
-            ['REQUEST_URI' => '/secrets']
+            ['REQUEST_URI' => '/secrets'],
         );
         $request = $request->withAttribute('base', '/base');
 
@@ -831,7 +831,7 @@ class AuthenticationServiceTest extends TestCase
         ]);
         $this->assertSame(
             '/users/login?redirect=%2Fsecrets',
-            $service->getUnauthenticatedRedirectUrl($request)
+            $service->getUnauthenticatedRedirectUrl($request),
         );
     }
 
@@ -843,38 +843,38 @@ class AuthenticationServiceTest extends TestCase
         ]);
 
         $request = ServerRequestFactory::fromGlobals(
-            ['REQUEST_URI' => '/secrets']
+            ['REQUEST_URI' => '/secrets'],
         );
         $this->assertNull($service->getLoginRedirect($request));
 
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/secrets'],
-            ['redirect' => '']
+            ['redirect' => ''],
         );
         $this->assertNull($service->getLoginRedirect($request));
 
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/secrets'],
-            ['redirect' => 'http://evil.ca/evil/path']
+            ['redirect' => 'http://evil.ca/evil/path'],
         );
         $this->assertNull($service->getLoginRedirect($request));
 
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/secrets'],
-            ['redirect' => 'ok.com/path']
+            ['redirect' => 'ok.com/path'],
         );
         $this->assertSame(
             '/ok.com/path',
-            $service->getLoginRedirect($request)
+            $service->getLoginRedirect($request),
         );
 
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/secrets'],
-            ['redirect' => '/path/with?query=string']
+            ['redirect' => '/path/with?query=string'],
         );
         $this->assertSame(
             '/path/with?query=string',
-            $service->getLoginRedirect($request)
+            $service->getLoginRedirect($request),
         );
     }
 
@@ -887,7 +887,7 @@ class AuthenticationServiceTest extends TestCase
     {
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/'],
-            []
+            [],
         );
 
         $response = new Response();
@@ -920,7 +920,7 @@ class AuthenticationServiceTest extends TestCase
     {
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/'],
-            []
+            [],
         );
 
         $response = new Response();
@@ -950,7 +950,7 @@ class AuthenticationServiceTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
         $response = new Response();
         $impersonator = new ArrayObject(['username' => 'mariano']);
@@ -979,7 +979,7 @@ class AuthenticationServiceTest extends TestCase
     {
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/'],
-            []
+            [],
         );
 
         $response = new Response();
@@ -1014,7 +1014,7 @@ class AuthenticationServiceTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
         $response = new Response();
 
@@ -1042,7 +1042,7 @@ class AuthenticationServiceTest extends TestCase
     {
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/'],
-            []
+            [],
         );
 
         $impersonator = new ArrayObject(['username' => 'mariano']);
@@ -1070,7 +1070,7 @@ class AuthenticationServiceTest extends TestCase
     {
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/'],
-            []
+            [],
         );
 
         $user = new ArrayObject(['username' => 'mariano']);
@@ -1097,7 +1097,7 @@ class AuthenticationServiceTest extends TestCase
         $request = ServerRequestFactory::fromGlobals(
             ['REQUEST_URI' => '/testpath'],
             [],
-            ['username' => 'mariano', 'password' => 'password']
+            ['username' => 'mariano', 'password' => 'password'],
         );
 
         $service = new AuthenticationService([

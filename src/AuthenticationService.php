@@ -197,7 +197,7 @@ class AuthenticationService implements AuthenticationServiceInterface, Impersona
 
         if ($result === null) {
             throw new RuntimeException(
-                'No authenticators loaded. You need to load at least one authenticator.'
+                'No authenticators loaded. You need to load at least one authenticator.',
             );
         }
 
@@ -247,7 +247,7 @@ class AuthenticationService implements AuthenticationServiceInterface, Impersona
     public function persistIdentity(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        ArrayAccess|array $identity
+        ArrayAccess|array $identity,
     ): array {
         foreach ($this->authenticators() as $authenticator) {
             if ($authenticator instanceof PersistenceInterface) {
@@ -348,7 +348,7 @@ class AuthenticationService implements AuthenticationServiceInterface, Impersona
             throw new RuntimeException(sprintf(
                 'Object `%s` does not implement `%s`',
                 get_class($identity),
-                IdentityInterface::class
+                IdentityInterface::class,
             ));
         }
 
@@ -450,7 +450,7 @@ class AuthenticationService implements AuthenticationServiceInterface, Impersona
         ServerRequestInterface $request,
         ResponseInterface $response,
         ArrayAccess $impersonator,
-        ArrayAccess $impersonated
+        ArrayAccess $impersonated,
     ): array {
         $provider = $this->getImpersonationProvider();
 
@@ -499,7 +499,7 @@ class AuthenticationService implements AuthenticationServiceInterface, Impersona
         if (!($provider instanceof ImpersonationInterface)) {
             $className = get_class($provider);
             throw new InvalidArgumentException(
-                "The {$className} Provider must implement ImpersonationInterface in order to use impersonation."
+                "The {$className} Provider must implement ImpersonationInterface in order to use impersonation.",
             );
         }
 

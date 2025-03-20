@@ -150,7 +150,7 @@ class AuthenticationComponent extends Component implements EventDispatcherInterf
         if ($service === null) {
             throw new Exception(
                 'The request object does not contain the required `authentication` attribute. Verify the ' .
-                'AuthenticationMiddleware has been added.'
+                'AuthenticationMiddleware has been added.',
             );
         }
 
@@ -303,7 +303,7 @@ class AuthenticationComponent extends Component implements EventDispatcherInterf
         $result = $service->persistIdentity(
             $controller->getRequest(),
             $controller->getResponse(),
-            $identity
+            $identity,
         );
 
         $controller->setRequest($result['request']);
@@ -325,7 +325,7 @@ class AuthenticationComponent extends Component implements EventDispatcherInterf
         /** @psalm-var array{request: \Cake\Http\ServerRequest, response: \Cake\Http\Response} $result */
         $result = $this->getAuthenticationService()->clearIdentity(
             $controller->getRequest(),
-            $controller->getResponse()
+            $controller->getResponse(),
         );
 
         $controller->setRequest($result['request']);
@@ -396,7 +396,7 @@ class AuthenticationComponent extends Component implements EventDispatcherInterf
             $controller->getRequest(),
             $controller->getResponse(),
             $impersonator,
-            $impersonated
+            $impersonated,
         );
 
         if (!$service->isImpersonating($controller->getRequest())) {
@@ -424,7 +424,7 @@ class AuthenticationComponent extends Component implements EventDispatcherInterf
         /** @psalm-var array{request: \Cake\Http\ServerRequest, response: \Cake\Http\Response} $result */
         $result = $service->stopImpersonating(
             $controller->getRequest(),
-            $controller->getResponse()
+            $controller->getResponse(),
         );
 
         if ($service->isImpersonating($controller->getRequest())) {
@@ -453,7 +453,7 @@ class AuthenticationComponent extends Component implements EventDispatcherInterf
         $controller = $this->getController();
 
         return $service->isImpersonating(
-            $controller->getRequest()
+            $controller->getRequest(),
         );
     }
 
@@ -469,7 +469,7 @@ class AuthenticationComponent extends Component implements EventDispatcherInterf
         if (!($service instanceof ImpersonationInterface)) {
             $className = get_class($service);
             throw new InvalidArgumentException(
-                "The {$className} must implement ImpersonationInterface in order to use impersonation."
+                "The {$className} must implement ImpersonationInterface in order to use impersonation.",
             );
         }
 

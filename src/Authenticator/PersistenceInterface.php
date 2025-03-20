@@ -34,7 +34,7 @@ interface PersistenceInterface
     public function persistIdentity(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        ArrayAccess|array $identity
+        ArrayAccess|array $identity,
     ): array;
 
     /**

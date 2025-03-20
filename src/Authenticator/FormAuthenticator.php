@@ -100,7 +100,7 @@ class FormAuthenticator extends AbstractAuthenticator
             sprintf(
                 'Login URL `%s` did not match `%s`.',
                 $uri,
-                implode('` or `', (array)$this->getConfig('loginUrl'))
+                implode('` or `', (array)$this->getConfig('loginUrl')),
             ),
         ];
 
