@@ -38,7 +38,7 @@ class UnauthenticatedException extends HttpException
     public function __construct(string $message = '', int $code = 401, ?Throwable $previous = null)
     {
         if (!$message) {
-            $message = 'Authentication is required to continue';
+            $message = __d('authentication', 'Authentication is required to continue');
         }
         parent::__construct($message, $code, $previous);
     }

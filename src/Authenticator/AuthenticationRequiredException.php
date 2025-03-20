@@ -45,7 +45,7 @@ class AuthenticationRequiredException extends HttpException
      */
     public function __construct(array $headers, string $body = '', int $code = 401)
     {
-        parent::__construct('Authentication is required to continue', $code);
+        parent::__construct(__d('authentication', 'Authentication is required to continue'), $code);
         $this->headers = $headers;
         $this->body = $body;
     }
