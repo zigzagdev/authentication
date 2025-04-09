@@ -21,7 +21,7 @@ use ArrayAccess;
 /**
  * Identity interface
  *
- * @template-extends \ArrayAccess<int, \Authentication\IdentityInterface>
+ * @template-extends \ArrayAccess<array-key, \Authentication\IdentityInterface>
  */
 interface IdentityInterface extends ArrayAccess
 {
