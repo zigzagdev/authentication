@@ -84,7 +84,12 @@ class AuthenticatorCollection extends AbstractCollection
      */
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {
+        if ($plugin) {
+            $class = $plugin . '.' . $class;
+        }
+
         $message = sprintf('Authenticator class `%s` was not found.', $class);
+
         throw new RuntimeException($message);
     }
 }
