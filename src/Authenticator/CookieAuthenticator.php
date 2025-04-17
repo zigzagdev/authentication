@@ -18,7 +18,6 @@ namespace Authentication\Authenticator;
 
 use ArrayAccess;
 use Authentication\Identifier\AbstractIdentifier;
-use Authentication\Identifier\IdentifierCollection;
 use Authentication\PasswordHasher\PasswordHasherTrait;
 use Authentication\UrlChecker\UrlCheckerTrait;
 use Cake\Http\Cookie\Cookie;
@@ -27,12 +26,11 @@ use Cake\Utility\Security;
 use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use RuntimeException;
 
 /**
  * Cookie Authenticator
  *
- * Authenticates an identity based on a cookies data.
+ * Authenticates an identity based on a cookie data.
  */
 class CookieAuthenticator extends AbstractAuthenticator implements PersistenceInterface
 {
@@ -56,28 +54,6 @@ class CookieAuthenticator extends AbstractAuthenticator implements PersistenceIn
         'passwordHasher' => 'Authentication.Default',
         'salt' => true,
     ];
-
-    /**
-     * @inheritDoc
-     */
-    public function __construct(IdentifierCollection $identifiers, array $config = [])
-    {
-        $this->_checkCakeVersion();
-
-        parent::__construct($identifiers, $config);
-    }
-
-    /**
-     * Checks the CakePHP Version by looking for the cookie implementation
-     *
-     * @return void
-     */
-    protected function _checkCakeVersion(): void
-    {
-        if (!class_exists(Cookie::class)) {
-            throw new RuntimeException('Install CakePHP version >=3.5.0 to use the `CookieAuthenticator`.');
-        }
-    }
 
     /**
      * @inheritDoc
