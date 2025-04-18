@@ -56,16 +56,6 @@ class IdentityHelper extends Helper
     public function initialize(array $config): void
     {
         $this->_identity = $this->_View->getRequest()->getAttribute($this->getConfig('identityAttribute'));
-
-        if (empty($this->_identity)) {
-            return;
-        }
-
-        if (!$this->_identity instanceof IdentityInterface) {
-            throw new RuntimeException(
-                sprintf('Identity found in request does not implement %s', IdentityInterface::class),
-            );
-        }
     }
 
     /**

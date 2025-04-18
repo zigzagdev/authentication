@@ -28,8 +28,7 @@ interface PersistenceInterface
      * @param \Psr\Http\Message\ServerRequestInterface $request The request object.
      * @param \Psr\Http\Message\ResponseInterface $response The response object.
      * @param \ArrayAccess|array $identity Identity data to persist.
-     * @return array
-     * @psalm-return array{request: \Psr\Http\Message\ServerRequestInterface, response: \Psr\Http\Message\ResponseInterface} Returns an array containing the request and response object
+     * @return array{request: \Psr\Http\Message\ServerRequestInterface, response: \Psr\Http\Message\ResponseInterface} Returns an array containing the request and response object
      */
     public function persistIdentity(
         ServerRequestInterface $request,
@@ -42,8 +41,7 @@ interface PersistenceInterface
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request The request object.
      * @param \Psr\Http\Message\ResponseInterface $response The response object.
-     * @return array
-     * @psalm-return array{request: \Psr\Http\Message\ServerRequestInterface, response: \Psr\Http\Message\ResponseInterface} Returns an array containing the request and response object
+     * @return array{request: \Psr\Http\Message\ServerRequestInterface, response: \Psr\Http\Message\ResponseInterface} Returns an array containing the request and response object
      */
     public function clearIdentity(ServerRequestInterface $request, ResponseInterface $response): array;
 }
