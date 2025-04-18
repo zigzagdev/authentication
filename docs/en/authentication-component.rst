@@ -103,4 +103,6 @@ applied during the ``Controller.initialize`` event instead::
     ]);
 
 You can also disable identity checks entirely with the ``requireIdentity``
-option.
+option or by calling ``disableIdentityCheck`` from the controller's ``beforeFilter()`` method itself::
+
+    $this->Authentication->disableIdentityCheck();
