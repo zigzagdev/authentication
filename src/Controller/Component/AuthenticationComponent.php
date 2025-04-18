@@ -191,6 +191,17 @@ class AuthenticationComponent extends Component implements EventDispatcherInterf
     }
 
     /**
+     * Disables the identity check for this controller and as all its actions.
+     * They then don't require an authentication identity to be present.
+     *
+     * @return void
+     */
+    public function disableIdentityCheck(): void
+    {
+        $this->setConfig('requireIdentity', false);
+    }
+
+    /**
      * Set the list of actions that don't require an authentication identity to be present.
      *
      * Actions not in this list will require an identity to be present. Any
