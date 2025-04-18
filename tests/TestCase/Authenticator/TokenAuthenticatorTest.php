@@ -132,6 +132,15 @@ class TokenAuthenticatorTest extends TestCase
         $this->assertInstanceOf(Result::class, $result);
         $this->assertSame(Result::SUCCESS, $result->getStatus());
 
+        $requestWithHeaders = $this->request->withAddedHeader('X-Dipper-Auth', 'dipper_mariano');
+        $tokenAuth = new TokenAuthenticator($this->identifiers, [
+            'header' => 'X-Dipper-Auth',
+            'tokenPrefix' => 'dipper_',
+        ]);
+        $result = $tokenAuth->authenticate($requestWithHeaders);
+        $this->assertInstanceOf(Result::class, $result);
+        $this->assertSame(Result::SUCCESS, $result->getStatus());
+
         //invalid prefix
         $requestWithHeaders = $this->request->withAddedHeader('Token', 'bearer mariano');
         $tokenAuth = new TokenAuthenticator($this->identifiers, [
