@@ -24,6 +24,7 @@ use Authentication\Test\TestCase\AuthenticationTestCase as TestCase;
 use Cake\Http\Exception\UnauthorizedException;
 use Cake\Http\Response;
 use Cake\Http\ServerRequestFactory;
+use Cake\Http\Session;
 use Cake\ORM\TableRegistry;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -58,11 +59,7 @@ class SessionAuthenticatorTest extends TestCase
            'Authentication.Password',
         ]);
 
-        $class = 'Cake\Http\Session';
-        if (!class_exists($class)) {
-            $class = '\Cake\Network\Session';
-        }
-        $this->sessionMock = $this->getMockBuilder($class)
+        $this->sessionMock = $this->getMockBuilder(Session::class)
             ->disableOriginalConstructor()
             ->onlyMethods(['read', 'write', 'delete', 'renew', 'check'])
             ->getMock();
