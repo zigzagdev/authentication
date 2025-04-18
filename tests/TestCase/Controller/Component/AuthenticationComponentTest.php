@@ -56,11 +56,6 @@ class AuthenticationComponentTest extends TestCase
     protected $request;
 
     /**
-     * @var \Cake\Http\Response
-     */
-    protected $response;
-
-    /**
      * @var \Authentication\AuthenticationService
      */
     protected $service;
@@ -574,7 +569,7 @@ class AuthenticationComponentTest extends TestCase
         $request = $this->request
             ->withAttribute('identity', $identity)
             ->withAttribute('authentication', $this->service);
-        $controller = new Controller($request, $this->response);
+        $controller = new Controller($request);
         $registry = new ComponentRegistry($controller);
         $component = new AuthenticationComponent($registry);
 
@@ -605,7 +600,7 @@ class AuthenticationComponentTest extends TestCase
         $request = $this->request
             ->withAttribute('identity', $identity)
             ->withAttribute('authentication', $this->service);
-        $controller = new Controller($request, $this->response);
+        $controller = new Controller($request);
         $registry = new ComponentRegistry($controller);
         $component = new AuthenticationComponent($registry);
 
@@ -630,7 +625,7 @@ class AuthenticationComponentTest extends TestCase
         $impersonated = new ArrayObject(['username' => 'larry']);
         $request = $this->request
             ->withAttribute('authentication', $this->service);
-        $controller = new Controller($request, $this->response);
+        $controller = new Controller($request);
         $registry = new ComponentRegistry($controller);
         $component = new AuthenticationComponent($registry);
         $this->expectException(UnauthenticatedException::class);
@@ -659,7 +654,7 @@ class AuthenticationComponentTest extends TestCase
         $request = $this->request
             ->withAttribute('identity', $identity)
             ->withAttribute('authentication', $service);
-        $controller = new Controller($request, $this->response);
+        $controller = new Controller($request);
         $registry = new ComponentRegistry($controller);
         $component = new AuthenticationComponent($registry);
         $this->expectException(UnexpectedValueException::class);
@@ -680,7 +675,7 @@ class AuthenticationComponentTest extends TestCase
         $this->request->getSession()->write('AuthImpersonate', $impersonator);
         $this->service->authenticate($this->request);
         $request = $this->request->withAttribute('authentication', $this->service);
-        $controller = new Controller($request, $this->response);
+        $controller = new Controller($request);
         $registry = new ComponentRegistry($controller);
         $component = new AuthenticationComponent($registry);
         $this->assertEquals($impersonator, $controller->getRequest()->getSession()->read('AuthImpersonate'));
@@ -710,7 +705,7 @@ class AuthenticationComponentTest extends TestCase
         $request = $this->request
             ->withAttribute('identity', $identity)
             ->withAttribute('authentication', $service);
-        $controller = new Controller($request, $this->response);
+        $controller = new Controller($request);
         $registry = new ComponentRegistry($controller);
         $component = new AuthenticationComponent($registry);
         $this->expectException(UnexpectedValueException::class);
@@ -733,7 +728,7 @@ class AuthenticationComponentTest extends TestCase
         $request = $this->request
             ->withAttribute('authentication', $this->service)
             ->withAttribute('identity', new Identity($impersonated));
-        $controller = new Controller($request, $this->response);
+        $controller = new Controller($request);
         $registry = new ComponentRegistry($controller);
         $component = new AuthenticationComponent($registry);
 
@@ -757,7 +752,7 @@ class AuthenticationComponentTest extends TestCase
         $request = $this->request
             ->withAttribute('authentication', $service)
             ->withAttribute('identity', new Identity($user));
-        $controller = new Controller($request, $this->response);
+        $controller = new Controller($request);
         $registry = new ComponentRegistry($controller);
         $component = new AuthenticationComponent($registry);
 
@@ -778,7 +773,7 @@ class AuthenticationComponentTest extends TestCase
         $this->request->getSession()->write('Auth', $user);
         $this->service->authenticate($this->request);
         $request = $this->request->withAttribute('authentication', $this->service);
-        $controller = new Controller($request, $this->response);
+        $controller = new Controller($request);
         $registry = new ComponentRegistry($controller);
         $component = new AuthenticationComponent($registry);
 
