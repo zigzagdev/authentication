@@ -44,12 +44,12 @@ class HttpDigestAuthenticatorTest extends TestCase
     ];
 
     /**
-     * @var \Authentication\IdentifierCollection
+     * @var \Authentication\Identifier\IdentifierCollection
      */
     protected $identifiers;
 
     /**
-     * @var \Autnentication\Authenticator\HttpDigestAuthenticator
+     * @var \Authentication\Authenticator\HttpDigestAuthenticator
      */
     protected $auth;
 

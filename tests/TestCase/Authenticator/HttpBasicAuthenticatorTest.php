@@ -38,12 +38,12 @@ class HttpBasicAuthenticatorTest extends TestCase
     ];
 
     /**
-     * @var \Authentication\IdentifierCollection
+     * @var \Authentication\Identifier\IdentifierCollection
      */
     protected $identifiers;
 
     /**
-     * @var \Autnentication\Authenticator\HttpBasicAuthenticator
+     * @var \Authentication\Authenticator\HttpBasicAuthenticator
      */
     protected $auth;
 

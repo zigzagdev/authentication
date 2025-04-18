@@ -35,7 +35,7 @@ class TokenAuthenticatorTest extends TestCase
     ];
 
     /**
-     * @var \Authentication\IdentifierCollection
+     * @var \Authentication\Identifier\IdentifierCollection
      */
     protected $identifiers;
 

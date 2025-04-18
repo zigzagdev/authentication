@@ -42,7 +42,7 @@ class SessionAuthenticatorTest extends TestCase
     ];
 
     /**
-     * @var \Authentication\IdentifierCollection
+     * @var \Authentication\Identifier\IdentifierCollection
      */
     protected $identifiers;
 
