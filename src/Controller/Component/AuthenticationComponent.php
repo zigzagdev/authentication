@@ -299,7 +299,7 @@ class AuthenticationComponent extends Component implements EventDispatcherInterf
 
         $service->clearIdentity($controller->getRequest(), $controller->getResponse());
 
-        /** @psalm-var array{request: \Cake\Http\ServerRequest, response: \Cake\Http\Response} $result */
+        /** @var array{request: \Cake\Http\ServerRequest, response: \Cake\Http\Response} $result */
         $result = $service->persistIdentity(
             $controller->getRequest(),
             $controller->getResponse(),
@@ -322,7 +322,7 @@ class AuthenticationComponent extends Component implements EventDispatcherInterf
     public function logout(): ?string
     {
         $controller = $this->getController();
-        /** @psalm-var array{request: \Cake\Http\ServerRequest, response: \Cake\Http\Response} $result */
+        /** @var array{request: \Cake\Http\ServerRequest, response: \Cake\Http\Response} $result */
         $result = $this->getAuthenticationService()->clearIdentity(
             $controller->getRequest(),
             $controller->getResponse(),
@@ -391,7 +391,7 @@ class AuthenticationComponent extends Component implements EventDispatcherInterf
             $impersonator = new ArrayObject($impersonator);
         }
         $controller = $this->getController();
-        /** @psalm-var array{request: \Cake\Http\ServerRequest, response: \Cake\Http\Response} $result */
+        /** @var array{request: \Cake\Http\ServerRequest, response: \Cake\Http\Response} $result */
         $result = $service->impersonate(
             $controller->getRequest(),
             $controller->getResponse(),
@@ -421,7 +421,7 @@ class AuthenticationComponent extends Component implements EventDispatcherInterf
 
         $controller = $this->getController();
 
-        /** @psalm-var array{request: \Cake\Http\ServerRequest, response: \Cake\Http\Response} $result */
+        /** @var array{request: \Cake\Http\ServerRequest, response: \Cake\Http\Response} $result */
         $result = $service->stopImpersonating(
             $controller->getRequest(),
             $controller->getResponse(),

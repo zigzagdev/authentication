@@ -212,14 +212,13 @@ class AuthenticationService implements AuthenticationServiceInterface, Impersona
      * @param \Psr\Http\Message\ServerRequestInterface $request The request.
      * @param \Psr\Http\Message\ResponseInterface $response The response.
      * @return array Return an array containing the request and response objects.
-     * @psalm-return array{request: \Psr\Http\Message\ServerRequestInterface, response: \Psr\Http\Message\ResponseInterface}
+     * @return array{request: \Psr\Http\Message\ServerRequestInterface, response: \Psr\Http\Message\ResponseInterface}
      */
     public function clearIdentity(ServerRequestInterface $request, ResponseInterface $response): array
     {
         foreach ($this->authenticators() as $authenticator) {
             if ($authenticator instanceof PersistenceInterface) {
                 if ($authenticator instanceof ImpersonationInterface && $authenticator->isImpersonating($request)) {
-                    /** @psalm-var array{request: \Cake\Http\ServerRequest, response: \Cake\Http\Response} $stopImpersonationResult */
                     $stopImpersonationResult = $authenticator->stopImpersonating($request, $response);
                     ['request' => $request, 'response' => $response] = $stopImpersonationResult;
                 }
@@ -241,8 +240,7 @@ class AuthenticationService implements AuthenticationServiceInterface, Impersona
      * @param \Psr\Http\Message\ServerRequestInterface $request The request.
      * @param \Psr\Http\Message\ResponseInterface $response The response.
      * @param \ArrayAccess|array $identity Identity data.
-     * @return array
-     * @psalm-return array{request: \Psr\Http\Message\ServerRequestInterface, response: \Psr\Http\Message\ResponseInterface}
+     * @return array{request: \Psr\Http\Message\ServerRequestInterface, response: \Psr\Http\Message\ResponseInterface}
      */
     public function persistIdentity(
         ServerRequestInterface $request,

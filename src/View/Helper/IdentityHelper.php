@@ -18,7 +18,6 @@ namespace Authentication\View\Helper;
 use Authentication\IdentityInterface;
 use Cake\Utility\Hash;
 use Cake\View\Helper;
-use RuntimeException;
 
 /**
  * Identity Helper
@@ -56,16 +55,6 @@ class IdentityHelper extends Helper
     public function initialize(array $config): void
     {
         $this->_identity = $this->_View->getRequest()->getAttribute($this->getConfig('identityAttribute'));
-
-        if (empty($this->_identity)) {
-            return;
-        }
-
-        if (!$this->_identity instanceof IdentityInterface) {
-            throw new RuntimeException(
-                sprintf('Identity found in request does not implement %s', IdentityInterface::class),
-            );
-        }
     }
 
     /**

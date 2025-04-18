@@ -29,7 +29,7 @@ interface ImpersonationInterface
      * @param \Psr\Http\Message\ResponseInterface $response The response
      * @param \ArrayAccess $impersonator User who impersonates
      * @param \ArrayAccess $impersonated User impersonated
-     * @return array
+     * @return array{request: \Psr\Http\Message\ServerRequestInterface, response: \Psr\Http\Message\ResponseInterface}
      */
     public function impersonate(
         ServerRequestInterface $request,
@@ -43,7 +43,7 @@ interface ImpersonationInterface
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request The request
      * @param \Psr\Http\Message\ResponseInterface $response The response
-     * @return array
+     * @return array{request: \Psr\Http\Message\ServerRequestInterface, response: \Psr\Http\Message\ResponseInterface}
      */
     public function stopImpersonating(ServerRequestInterface $request, ResponseInterface $response): array;
 
