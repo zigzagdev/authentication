@@ -18,7 +18,6 @@ namespace Authentication\View\Helper;
 use Authentication\IdentityInterface;
 use Cake\Utility\Hash;
 use Cake\View\Helper;
-use RuntimeException;
 
 /**
  * Identity Helper
