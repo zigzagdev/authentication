@@ -89,7 +89,7 @@ class ExtensionAdapter implements AdapterInterface
      *
      * @param string $host Hostname
      * @param int $port Port
-     * @param array<string, mixed> $options Additional LDAP options
+     * @param array $options Additional LDAP options
      * @return void
      */
     public function connect(string $host, int $port, array $options): void
@@ -110,7 +110,7 @@ class ExtensionAdapter implements AdapterInterface
         $this->_unsetErrorHandler();
 
         foreach ($options as $option => $value) {
-            $this->setOption($option, $value);
+            $this->setOption((int)$option, $value);
         }
     }
 
