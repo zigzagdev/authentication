@@ -69,7 +69,7 @@ class DefaultUrlChecker implements UrlCheckerInterface
      * method and inject additional options without the need to use the
      * MergeVarsTrait.
      *
-     * @param array $options Options to merge in
+     * @param array<string, mixed> $options Options to merge in
      * @return array
      */
     protected function _mergeDefaultOptions(array $options): array
@@ -80,7 +80,7 @@ class DefaultUrlChecker implements UrlCheckerInterface
     /**
      * Gets the checker function name or a callback
      *
-     * @param array $options Array of options
+     * @param array<string, mixed> $options Array of options
      * @return callable
      */
     protected function _getChecker(array $options): callable
