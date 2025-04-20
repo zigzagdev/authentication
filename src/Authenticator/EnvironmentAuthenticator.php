@@ -137,7 +137,7 @@ class EnvironmentAuthenticator extends AbstractAuthenticator
             return $this->_buildLoginUrlErrorResult($request);
         }
         $data = $this->_getData($request);
-        if (empty($data)) {
+        if (!$data) {
             return new Result(null, Result::FAILURE_CREDENTIALS_MISSING, [
                 'Environment credentials not found',
             ]);
@@ -147,7 +147,7 @@ class EnvironmentAuthenticator extends AbstractAuthenticator
 
         $user = $this->_identifier->identify($data);
 
-        if (empty($user)) {
+        if (!$user) {
             return new Result(null, Result::FAILURE_IDENTITY_NOT_FOUND, $this->_identifier->getErrors());
         }
 
