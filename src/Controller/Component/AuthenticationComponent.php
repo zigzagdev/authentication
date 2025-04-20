@@ -192,7 +192,7 @@ class AuthenticationComponent extends Component implements EventDispatcherInterf
 
     /**
      * Disables the identity check for this controller and as all its actions.
-     * They then don't require an authentication identity to be present.
+     * It then doesn't require an authentication identity to be present.
      *
      * @return void
      */
