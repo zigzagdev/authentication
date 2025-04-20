@@ -130,7 +130,7 @@ class FormAuthenticator extends AbstractAuthenticator
 
         $user = $this->_identifier->identify($data);
 
-        if (empty($user)) {
+        if (!$user) {
             return new Result(null, Result::FAILURE_IDENTITY_NOT_FOUND, $this->_identifier->getErrors());
         }
 

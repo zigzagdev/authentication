@@ -98,7 +98,7 @@ class HttpDigestAuthenticator extends HttpBasicAuthenticator
             AbstractIdentifier::CREDENTIAL_USERNAME => $digest['username'],
         ]);
 
-        if (empty($user)) {
+        if (!$user) {
             return new Result(null, Result::FAILURE_IDENTITY_NOT_FOUND);
         }
 
@@ -132,13 +132,13 @@ class HttpDigestAuthenticator extends HttpBasicAuthenticator
     {
         $server = $request->getServerParams();
         $digest = empty($server['PHP_AUTH_DIGEST']) ? null : $server['PHP_AUTH_DIGEST'];
-        if (empty($digest) && function_exists('apache_request_headers')) {
+        if (!$digest && function_exists('apache_request_headers')) {
             $headers = apache_request_headers();
             if (!empty($headers['Authorization']) && substr($headers['Authorization'], 0, 7) === 'Digest ') {
                 $digest = substr($headers['Authorization'], 7);
             }
         }
-        if (empty($digest)) {
+        if (!$digest) {
             return null;
         }
 
@@ -165,7 +165,7 @@ class HttpDigestAuthenticator extends HttpBasicAuthenticator
             unset($req[$i[1]]);
         }
 
-        if (empty($req)) {
+        if (!$req) {
             return $keys;
         }
 

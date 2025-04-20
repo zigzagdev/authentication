@@ -44,8 +44,7 @@ class DefaultUrlChecker implements UrlCheckerInterface
         $options = $this->_mergeDefaultOptions($options);
 
         $urls = (array)$loginUrls;
-
-        if (empty($urls)) {
+        if (!$urls) {
             return true;
         }
 
