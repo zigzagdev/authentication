@@ -490,7 +490,7 @@ class AuthenticationComponentTest extends TestCase
     }
 
     /**
-     * test disabling requireidentity via settings
+     * test disabling requireIdentity via settings
      *
      * @return void
      */
@@ -504,6 +504,27 @@ class AuthenticationComponentTest extends TestCase
         $controller->loadComponent('Authentication.Authentication', [
             'requireIdentity' => false,
         ]);
+
+        // Mismatched actions would normally cause an error.
+        $controller->Authentication->allowUnauthenticated(['index', 'add']);
+        $controller->startupProcess();
+        $this->assertTrue(true, 'No exception should be raised as require identity is off.');
+    }
+
+    /**
+     * test disabling requireIdentity via convenience method
+     *
+     * @return void
+     */
+    public function testUnauthenticatedActionsDisabledOptionsCall()
+    {
+        $request = $this->request
+            ->withParam('action', 'view')
+            ->withAttribute('authentication', $this->service);
+
+        $controller = new Controller($request);
+        $controller->loadComponent('Authentication.Authentication');
+        $controller->Authentication->disableIdentityCheck();
 
         // Mismatched actions would normally cause an error.
         $controller->Authentication->allowUnauthenticated(['index', 'add']);
