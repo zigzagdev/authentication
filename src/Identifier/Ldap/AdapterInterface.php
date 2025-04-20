@@ -32,7 +32,7 @@ interface AdapterInterface
      *
      * @param string $host Hostname
      * @param int $port Port
-     * @param array $options Additional options
+     * @param array<string, mixed> $options Additional options
      * @return void
      */
     public function connect(string $host, int $port, array $options): void;

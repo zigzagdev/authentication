@@ -89,7 +89,7 @@ class ExtensionAdapter implements AdapterInterface
      *
      * @param string $host Hostname
      * @param int $port Port
-     * @param array $options Additonal LDAP options
+     * @param array<string, mixed> $options Additional LDAP options
      * @return void
      */
     public function connect(string $host, int $port, array $options): void
