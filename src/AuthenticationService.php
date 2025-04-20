@@ -373,7 +373,7 @@ class AuthenticationService implements AuthenticationServiceInterface, Impersona
         if ($target === null) {
             return null;
         }
-        if (is_array($target)) {
+        if (is_array($target) && class_exists(Router::class)) {
             $target = Router::url($target);
         }
         if ($param === null) {
