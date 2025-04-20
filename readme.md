@@ -23,18 +23,12 @@ You can install this plugin into your CakePHP application using
 [composer](https://getcomposer.org):
 
 ```
-php composer.phar require cakephp/authentication
+composer require cakephp/authentication
 ```
 
-Load the plugin by adding the following statement in your project's
-`src/Application.php`:
-```php
-public function bootstrap(): void
-{
-    parent::bootstrap();
-
-    $this->addPlugin('Authentication');
-}
+Then load the plugin:
+```
+bin/cake plugin load Authentication
 ```
 
 ## Documentation
