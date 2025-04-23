@@ -37,4 +37,6 @@ Documentation for this plugin can be found in the [CakePHP Cookbook](https://boo
 
 ## IDE compatibility improvements
 
-For `AuthenticationService::loadIdentifier()` you an find an IdeHelper task in [IdeHelperExtra plugin](https://github.com/dereuromark/cakephp-ide-helper-extra/).
+There are IdeHelper tasks in [IdeHelperExtra plugin](https://github.com/dereuromark/cakephp-ide-helper-extra/) to provide auto-complete:
+- `AuthenticationService::loadAuthenticator()`
+- `IdentifierCollection::load()`
