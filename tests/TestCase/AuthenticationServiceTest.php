@@ -32,6 +32,7 @@ use Cake\Http\Response;
 use Cake\Http\ServerRequest;
 use Cake\Http\ServerRequestFactory;
 use Cake\I18n\DateTime;
+use Cake\Routing\Router;
 use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -816,6 +817,30 @@ class AuthenticationServiceTest extends TestCase
             '/users/login?foo=bar&redirect=%2Fsecrets#fragment',
             $service->getUnauthenticatedRedirectUrl($request),
         );
+    }
+
+    public function testGetUnauthenticatedRedirectUrlAsArray()
+    {
+        Router::fullBaseUrl('http://localhost');
+
+        $builder = Router::createRouteBuilder('/');
+        $builder->connect(
+            '/login',
+            ['controller' => 'Users', 'action' => 'login'],
+            ['_name' => 'login'],
+        );
+
+        $service = new AuthenticationService();
+        $request = ServerRequestFactory::fromGlobals(
+            ['REQUEST_URI' => '/secrets'],
+        );
+        $service->setConfig('unauthenticatedRedirect', [
+            'prefix' => false,
+            'plugin' => false,
+            'controller' => 'Users',
+            'action' => 'login',
+        ]);
+        $this->assertSame('/login', $service->getUnauthenticatedRedirectUrl($request));
     }
 
     public function testGetUnauthenticatedRedirectUrlWithBasePath()
