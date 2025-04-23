@@ -1,6 +1,6 @@
 # CakePHP Authentication
 
-![Build Status](https://github.com/cakephp/authentication/actions/workflows/ci.yml/badge.svg?branch=master)
+[![CI](https://github.com/cakephp/authentication/actions/workflows/ci.yml/badge.svg)](https://github.com/cakephp/authentication/actions/workflows/ci.yml)
 [![Latest Stable Version](https://img.shields.io/github/v/release/cakephp/authentication?sort=semver&style=flat-square)](https://packagist.org/packages/cakephp/authentication)
 [![Total Downloads](https://img.shields.io/packagist/dt/cakephp/authentication?style=flat-square)](https://packagist.org/packages/cakephp/authentication/stats)
 [![Code Coverage](https://img.shields.io/coveralls/cakephp/authentication/master.svg?style=flat-square)](https://coveralls.io/r/cakephp/authentication?branch=master)
