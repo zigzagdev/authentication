@@ -134,9 +134,14 @@ class CookieAuthenticator extends AbstractAuthenticator implements PersistenceIn
         $usernameField = $this->getConfig('fields.username');
         $passwordField = $this->getConfig('fields.password');
 
-        $salt = $this->getConfig('salt', '');
+        if ($identity[$usernameField] === null || $identity[$passwordField] === null) {
+            throw new InvalidArgumentException(
+                sprintf('Fields %s cannot be found in entity', '`' . $usernameField . '`/`' . $passwordField . '`'),
+            );
+        }
 
         $value = $identity[$usernameField] . $identity[$passwordField];
+        $salt = $this->getConfig('salt', '');
 
         if ($salt === false) {
             return $value;

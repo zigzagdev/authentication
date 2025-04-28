@@ -383,6 +383,37 @@ class CookieAuthenticatorTest extends TestCase
     }
 
     /**
+     * @return void
+     */
+    public function testPersistIdentityInvalidConfig()
+    {
+        $identifiers = new IdentifierCollection([
+            'Authentication.Password',
+        ]);
+
+        $request = ServerRequestFactory::fromGlobals(
+            ['REQUEST_URI' => '/users/login'],
+        );
+        $request = $request->withParsedBody([
+            'remember_me' => 1,
+        ]);
+        $response = new Response();
+
+        $authenticator = new CookieAuthenticator($identifiers, [
+            'loginUrl' => '/users/login',
+        ]);
+
+        $identity = new ArrayObject([
+            'username' => null,
+            'password' => '$2a$10$u05j8FjsvLBNdfhBhc21LOuVMpzpabVXQ9OpC2wO3pSO0q6t7HHMO',
+        ]);
+
+        $this->expectException(InvalidArgumentException::class);
+
+        $authenticator->persistIdentity($request, $response, $identity);
+    }
+
+    /**
      * testClearIdentity
      *
      * @return void
