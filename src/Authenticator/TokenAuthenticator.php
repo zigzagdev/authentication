@@ -75,9 +75,9 @@ class TokenAuthenticator extends AbstractAuthenticator implements StatelessInter
      */
     protected function getTokenFromHeader(ServerRequestInterface $request, ?string $headerLine): ?string
     {
-        if (!empty($headerLine)) {
+        if ($headerLine) {
             $header = $request->getHeaderLine($headerLine);
-            if (!empty($header)) {
+            if ($header) {
                 return $header;
             }
         }
@@ -89,12 +89,12 @@ class TokenAuthenticator extends AbstractAuthenticator implements StatelessInter
      * Gets the token from the request query
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request The request that contains login information.
-     * @param string $queryParam Request query parameter name
+     * @param string|null $queryParam Request query parameter name
      * @return string|null
      */
     protected function getTokenFromQuery(ServerRequestInterface $request, ?string $queryParam): ?string
     {
-        if (empty($queryParam)) {
+        if (!$queryParam) {
             return null;
         }
 
@@ -123,7 +123,7 @@ class TokenAuthenticator extends AbstractAuthenticator implements StatelessInter
             TokenIdentifier::CREDENTIAL_TOKEN => $token,
         ]);
 
-        if (empty($user)) {
+        if (!$user) {
             return new Result(null, Result::FAILURE_IDENTITY_NOT_FOUND, $this->_identifier->getErrors());
         }
 

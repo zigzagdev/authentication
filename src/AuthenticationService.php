@@ -26,6 +26,7 @@ use Authentication\Authenticator\StatelessInterface;
 use Authentication\Identifier\IdentifierCollection;
 use Authentication\Identifier\IdentifierInterface;
 use Cake\Core\InstanceConfigTrait;
+use Cake\Routing\Router;
 use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -371,6 +372,9 @@ class AuthenticationService implements AuthenticationServiceInterface, Impersona
         $target = $this->getConfig('unauthenticatedRedirect');
         if ($target === null) {
             return null;
+        }
+        if (is_array($target) && class_exists(Router::class)) {
+            $target = Router::url($target);
         }
         if ($param === null) {
             return $target;

@@ -26,8 +26,8 @@ class DefaultUrlChecker implements UrlCheckerInterface
     /**
      * Default Options
      *
-     * - `urlChecker` Whether or not to use `loginUrl` as regular expression(s).
-     * - `checkFullUrl` Whether or not to check the full request URI.
+     * - `urlChecker` Whether to use `loginUrl` as regular expression(s).
+     * - `checkFullUrl` Whether to check the full request URI.
      *
      * @var array
      */
@@ -44,8 +44,7 @@ class DefaultUrlChecker implements UrlCheckerInterface
         $options = $this->_mergeDefaultOptions($options);
 
         $urls = (array)$loginUrls;
-
-        if (empty($urls)) {
+        if (!$urls) {
             return true;
         }
 
@@ -69,7 +68,7 @@ class DefaultUrlChecker implements UrlCheckerInterface
      * method and inject additional options without the need to use the
      * MergeVarsTrait.
      *
-     * @param array $options Options to merge in
+     * @param array<string, mixed> $options Options to merge in
      * @return array
      */
     protected function _mergeDefaultOptions(array $options): array
@@ -80,7 +79,7 @@ class DefaultUrlChecker implements UrlCheckerInterface
     /**
      * Gets the checker function name or a callback
      *
-     * @param array $options Array of options
+     * @param array<string, mixed> $options Array of options
      * @return callable
      */
     protected function _getChecker(array $options): callable

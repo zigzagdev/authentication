@@ -28,7 +28,7 @@ class CakeRouterUrlChecker extends DefaultUrlChecker
     /**
      * Default Options
      *
-     * - `checkFullUrl` Whether or not to check the full request URI.
+     * - `checkFullUrl` Whether to check the full request URI.
      *
      * @var array
      */

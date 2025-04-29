@@ -110,7 +110,7 @@ class IdentityHelper extends Helper
      */
     public function get(?string $key = null): mixed
     {
-        if (empty($this->_identity)) {
+        if ($this->_identity === null) {
             return null;
         }
 

@@ -13,7 +13,7 @@ trait PasswordHasherTrait
     protected ?PasswordHasherInterface $_passwordHasher = null;
 
     /**
-     * Whether or not the user authenticated by this class
+     * Whether the user authenticated by this class
      * requires their password to be rehashed with another algorithm.
      *
      * @var bool

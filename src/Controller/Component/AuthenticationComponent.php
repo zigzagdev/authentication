@@ -388,6 +388,7 @@ class AuthenticationComponent extends Component implements EventDispatcherInterf
      * @param \ArrayAccess $impersonated User impersonated
      * @return $this
      * @throws \Exception
+     * @see https://book.cakephp.org/authentication/3/en/impersonation.html
      */
     public function impersonate(ArrayAccess $impersonated)
     {
@@ -425,6 +426,7 @@ class AuthenticationComponent extends Component implements EventDispatcherInterf
      *
      * @return $this
      * @throws \Exception
+     * @see https://book.cakephp.org/authentication/3/en/impersonation.html
      */
     public function stopImpersonating()
     {
@@ -453,6 +455,7 @@ class AuthenticationComponent extends Component implements EventDispatcherInterf
      *
      * @return bool
      * @throws \Exception
+     * @see https://book.cakephp.org/authentication/3/en/impersonation.html
      */
     public function isImpersonating(): bool
     {
@@ -473,6 +476,7 @@ class AuthenticationComponent extends Component implements EventDispatcherInterf
      *
      * @return \Authentication\Authenticator\ImpersonationInterface
      * @throws \Exception
+     * @see https://book.cakephp.org/authentication/3/en/impersonation.html
      */
     protected function getImpersonationAuthenticationService(): ImpersonationInterface
     {

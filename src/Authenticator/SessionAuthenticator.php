@@ -31,7 +31,7 @@ class SessionAuthenticator extends AbstractAuthenticator implements PersistenceI
      * Default config for this object.
      * - `fields` The fields to use to verify a user by.
      * - `sessionKey` Session key.
-     * - `identify` Whether or not to identify user data stored in a session. This is
+     * - `identify` Whether to identify user data stored in a session. This is
      *   useful if you want to remotely end sessions that have a different password stored,
      *   or if your identification logic needs additional conditions before a user can login.
      *
@@ -60,7 +60,7 @@ class SessionAuthenticator extends AbstractAuthenticator implements PersistenceI
         $session = $request->getAttribute('session');
         $user = $session->read($sessionKey);
 
-        if (empty($user)) {
+        if (!$user) {
             return new Result(null, Result::FAILURE_IDENTITY_NOT_FOUND);
         }
 
@@ -71,7 +71,7 @@ class SessionAuthenticator extends AbstractAuthenticator implements PersistenceI
             }
             $user = $this->_identifier->identify($credentials);
 
-            if (empty($user)) {
+            if (!$user) {
                 return new Result(null, Result::FAILURE_CREDENTIALS_INVALID);
             }
         }

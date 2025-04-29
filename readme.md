@@ -1,6 +1,6 @@
 # CakePHP Authentication
 
-![Build Status](https://github.com/cakephp/authentication/actions/workflows/ci.yml/badge.svg?branch=master)
+[![CI](https://github.com/cakephp/authentication/actions/workflows/ci.yml/badge.svg)](https://github.com/cakephp/authentication/actions/workflows/ci.yml)
 [![Latest Stable Version](https://img.shields.io/github/v/release/cakephp/authentication?sort=semver&style=flat-square)](https://packagist.org/packages/cakephp/authentication)
 [![Total Downloads](https://img.shields.io/packagist/dt/cakephp/authentication?style=flat-square)](https://packagist.org/packages/cakephp/authentication/stats)
 [![Code Coverage](https://img.shields.io/coveralls/cakephp/authentication/master.svg?style=flat-square)](https://coveralls.io/r/cakephp/authentication?branch=master)
@@ -23,18 +23,12 @@ You can install this plugin into your CakePHP application using
 [composer](https://getcomposer.org):
 
 ```
-php composer.phar require cakephp/authentication
+composer require cakephp/authentication
 ```
 
-Load the plugin by adding the following statement in your project's
-`src/Application.php`:
-```php
-public function bootstrap(): void
-{
-    parent::bootstrap();
-
-    $this->addPlugin('Authentication');
-}
+Then load the plugin:
+```
+bin/cake plugin load Authentication
 ```
 
 ## Documentation
@@ -43,4 +37,6 @@ Documentation for this plugin can be found in the [CakePHP Cookbook](https://boo
 
 ## IDE compatibility improvements
 
-For `AuthenticationService::loadIdentifier()` you an find an IdeHelper task in [IdeHelperExtra plugin](https://github.com/dereuromark/cakephp-ide-helper-extra/).
+There are IdeHelper tasks in [IdeHelperExtra plugin](https://github.com/dereuromark/cakephp-ide-helper-extra/) to provide auto-complete:
+- `AuthenticationService::loadAuthenticator()`
+- `IdentifierCollection::load()`
