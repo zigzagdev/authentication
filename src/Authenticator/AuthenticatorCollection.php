@@ -20,6 +20,7 @@ use Authentication\AbstractCollection;
 use Authentication\Identifier\IdentifierCollection;
 use Cake\Core\App;
 use RuntimeException;
+use function Cake\Core\deprecationWarning;
 
 /**
  * @extends \Authentication\AbstractCollection<\Authentication\Authenticator\AuthenticatorInterface>
@@ -42,6 +43,12 @@ class AuthenticatorCollection extends AbstractCollection
     public function __construct(IdentifierCollection $identifiers, array $config = [])
     {
         $this->_identifiers = $identifiers;
+        if ($identifiers->count() > 0) {
+            deprecationWarning(
+                '3.3.0',
+                'loadIdentifier() usage is deprecated. Directly pass Identifier to Authenticator.',
+            );
+        }
 
         parent::__construct($config);
     }
@@ -58,6 +65,15 @@ class AuthenticatorCollection extends AbstractCollection
     protected function _create(object|string $class, string $alias, array $config): AuthenticatorInterface
     {
         if (is_string($class)) {
+            if (!empty($config['identifier'])) {
+                $this->_identifiers = new IdentifierCollection((array)$config['identifier']);
+            } else {
+                deprecationWarning(
+                    '3.3.0',
+                    'loadIdentifier() usage is deprecated. Directly pass `\'identifier\'` config to Authenticator.',
+                );
+            }
+
             return new $class($this->_identifiers, $config);
         }
 
@@ -78,7 +94,7 @@ class AuthenticatorCollection extends AbstractCollection
 
     /**
      * @param string $class Missing class.
-     * @param string $plugin Class plugin.
+     * @param string|null $plugin Class plugin.
      * @return void
      * @throws \RuntimeException
      */

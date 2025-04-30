@@ -31,6 +31,7 @@ use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use RuntimeException;
+use function Cake\Core\deprecationWarning;
 
 /**
  * Authentication Service
@@ -165,9 +166,15 @@ class AuthenticationService implements AuthenticationServiceInterface, Impersona
      * @param string $name Name or class name.
      * @param array $config Identifier configuration.
      * @return \Authentication\Identifier\IdentifierInterface Identifier instance
+     * @deprecated 3.3.0: loadIdentifier() usage is deprecated. Directly pass Identifier to Authenticator.
      */
     public function loadIdentifier(string $name, array $config = []): IdentifierInterface
     {
+        deprecationWarning(
+            '3.3.0',
+            'loadIdentifier() usage is deprecated. Directly pass Identifier to Authenticator.',
+        );
+
         return $this->identifiers()->load($name, $config);
     }
 
@@ -281,7 +288,16 @@ class AuthenticationService implements AuthenticationServiceInterface, Impersona
      */
     public function getIdentificationProvider(): ?IdentifierInterface
     {
-        return $this->identifiers()->getIdentificationProvider();
+        if ($this->_successfulAuthenticator === null) {
+            return null;
+        }
+
+        $identifier = $this->_successfulAuthenticator->getIdentifier();
+        if ($identifier instanceof IdentifierCollection) {
+            return $identifier->getIdentificationProvider();
+        }
+
+        return $identifier;
     }
 
     /**
