@@ -150,6 +150,16 @@ class TokenAuthenticatorTest extends TestCase
         $result = $tokenAuth->authenticate($requestWithHeaders);
         $this->assertInstanceOf(Result::class, $result);
         $this->assertSame(Result::FAILURE_IDENTITY_NOT_FOUND, $result->getStatus());
+
+        // should not modify in between
+        $requestWithHeaders = $this->request->withAddedHeader('X-Dipper-Auth', 'auth-token-13');
+        $tokenAuth = new TokenAuthenticator($this->identifiers, [
+            'header' => 'X-Dipper-Auth',
+            'tokenPrefix' => 'token_',
+        ]);
+        $result = $tokenAuth->authenticate($requestWithHeaders);
+        $this->assertInstanceOf(Result::class, $result);
+        $this->assertSame(Result::SUCCESS, $result->getStatus());
     }
 
     /**
