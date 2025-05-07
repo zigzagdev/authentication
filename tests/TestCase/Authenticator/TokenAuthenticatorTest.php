@@ -151,11 +151,11 @@ class TokenAuthenticatorTest extends TestCase
         $this->assertInstanceOf(Result::class, $result);
         $this->assertSame(Result::FAILURE_IDENTITY_NOT_FOUND, $result->getStatus());
 
-        // should not modify in between
-        $requestWithHeaders = $this->request->withAddedHeader('X-Dipper-Auth', 'token_auth-token-13');
+        // should not remove prefix from token
+        $requestWithHeaders = $this->request->withAddedHeader('X-Dipper-Auth', 'mari mariano');
         $tokenAuth = new TokenAuthenticator($this->identifiers, [
             'header' => 'X-Dipper-Auth',
-            'tokenPrefix' => 'token_',
+            'tokenPrefix' => 'mari',
         ]);
         $result = $tokenAuth->authenticate($requestWithHeaders);
         $this->assertInstanceOf(Result::class, $result);
