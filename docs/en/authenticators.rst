@@ -141,7 +141,7 @@ Add the following to your ``Application`` class::
         // ...
         $service->loadIdentifier('Authentication.JwtSubject');
         $service->loadAuthenticator('Authentication.Jwt', [
-            'secretKey' => file_get_contents(CONFIG . '/jwt.key'),
+            'secretKey' => file_get_contents(CONFIG . '/jwt.pem'),
             'algorithm' => 'RS256',
             'returnPayload' => false
         ]);
