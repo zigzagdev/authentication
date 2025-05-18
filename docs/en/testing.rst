@@ -51,15 +51,23 @@ Token based authentication
 With token based authentication you need to simulate the
 ``Authorization`` header. After getting valid token setup the request::
 
-   public function testGet()
-   {
-       $token = $this->getToken();
-       $this->configRequest([
-           'headers' => ['Authorization' => 'Bearer ' . $token]
-       ]);
-       $this->get('/api/bookmarks');
-       $this->assertResponseOk();
-   }
+    protected function getToken(): string
+    {
+        // Get a token for a known user
+        $user = $this->fetchTable('Users')->get(1, contain: ['ApiTokens']);
+
+        return $user->api_tokens[0]->token;
+    }
+
+    public function testGet()
+    {
+        $token = $this->getToken();
+        $this->configRequest([
+            'headers' => ['Authorization' => 'Bearer ' . $token]
+        ]);
+        $this->get('/api/bookmarks');
+        $this->assertResponseOk();
+    }
 
 
 Basic/Digest based authentication
