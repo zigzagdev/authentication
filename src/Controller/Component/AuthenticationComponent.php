@@ -360,13 +360,16 @@ class AuthenticationComponent extends Component implements EventDispatcherInterf
      * Leverages the `unauthenticatedRedirect` and `queryParam` options in
      * the AuthenticationService.
      *
+     * @param array|string|null $default Default URL to use if no redirect URL is available.
      * @return string|null
      */
-    public function getLoginRedirect(): ?string
+    public function getLoginRedirect(array|string|null $default = null): ?string
     {
-        $controller = $this->getController();
+        if (is_array($default)) {
+            $default = Router::url(['_base' => false] + $default);
+        }
 
-        return $this->getAuthenticationService()->getLoginRedirect($controller->getRequest());
+        return $this->getAuthenticationService()->getLoginRedirect($this->getController()->getRequest()) ?? $default;
     }
 
     /**
