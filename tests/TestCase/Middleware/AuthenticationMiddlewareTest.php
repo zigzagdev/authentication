@@ -61,11 +61,10 @@ class AuthenticationMiddlewareTest extends TestCase
     {
         parent::setUp();
         $this->service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
-                'Authentication.Form',
+                'Authentication.Form' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
         ]);
         $this->application = new Application('config');
@@ -87,7 +86,6 @@ class AuthenticationMiddlewareTest extends TestCase
         $service = $handler->request->getAttribute('authentication');
         $this->assertInstanceOf(AuthenticationService::class, $service);
 
-        $this->assertTrue($service->identifiers()->has('Password'));
         $this->assertTrue($service->authenticators()->has('Form'));
     }
 
@@ -114,7 +112,6 @@ class AuthenticationMiddlewareTest extends TestCase
         $this->assertSame($this->service, $service);
         $this->assertSame('identity', $service->getConfig('identityAttribute'));
 
-        $this->assertTrue($service->identifiers()->has('Password'));
         $this->assertTrue($service->authenticators()->has('Form'));
     }
 
@@ -180,11 +177,10 @@ class AuthenticationMiddlewareTest extends TestCase
         // Setup the request with a session so we can test it being cleared
         $request->getSession()->write('Auth', ['username' => 'mariano']);
         $service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
-                'Authentication.Session',
+                'Authentication.Session' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
         ]);
         $handler = new TestRequestHandler(function ($request) {
@@ -269,12 +265,9 @@ class AuthenticationMiddlewareTest extends TestCase
             ['username' => 'mariano', 'password' => 'password'],
         );
         $this->service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
-                'Authentication.Form',
-                'Authentication.Session',
+                'Authentication.Form' => ['identifier' => 'Authentication.Password'],
+                'Authentication.Session' => ['identifier' => 'Authentication.Password'],
             ],
         ]);
         $middleware = new AuthenticationMiddleware($this->service);
@@ -333,11 +326,8 @@ class AuthenticationMiddlewareTest extends TestCase
         $handler = new TestRequestHandler();
 
         $service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
-                'Authentication.HttpBasic',
+                'Authentication.HttpBasic' => ['identifier' => 'Authentication.Password'],
             ],
         ]);
 
@@ -589,14 +579,11 @@ class AuthenticationMiddlewareTest extends TestCase
         $token = JWT::encode($data, 'secretKey', 'HS256');
 
         $this->service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-                'Authentication.JwtSubject',
-            ],
             'authenticators' => [
-                'Authentication.Form',
+                'Authentication.Form' => ['identifier' => 'Authentication.Password'],
                 'Authentication.Jwt' => [
                     'secretKey' => 'secretKey',
+                    'identifier' => 'Authentication.JwtSubject',
                 ],
             ],
         ]);
@@ -626,12 +613,9 @@ class AuthenticationMiddlewareTest extends TestCase
     public function testCookieAuthorizationThroughTheMiddlewareStack()
     {
         $this->service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
-                'Authentication.Form',
-                'Authentication.Cookie',
+                'Authentication.Form' => ['identifier' => 'Authentication.Password'],
+                'Authentication.Cookie' => ['identifier' => 'Authentication.Password'],
             ],
         ]);
 

@@ -29,16 +29,18 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
 
     public function authentication(AuthenticationServiceInterface $service)
     {
-        $service->loadIdentifier('Authentication.Password');
-        $service->loadAuthenticator('Authentication.Form');
+        $service->loadAuthenticator('Authentication.Form', [
+            'identifier' => 'Authentication.Password',
+        ]);
 
         return $service;
     }
 
     public function authenticationApi(AuthenticationServiceInterface $service)
     {
-        $service->loadIdentifier('Authentication.Token');
-        $service->loadAuthenticator('Authentication.Token');
+        $service->loadAuthenticator('Authentication.Token', [
+            'identifier' => 'Authentication.Token',
+        ]);
 
         return $service;
     }
@@ -52,8 +54,9 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
     public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
     {
         $service = new AuthenticationService();
-        $service->loadIdentifier('Authentication.Password');
-        $service->loadAuthenticator('Authentication.Form');
+        $service->loadAuthenticator('Authentication.Form', [
+            'identifier' => 'Authentication.Password',
+        ]);
 
         return $service;
     }

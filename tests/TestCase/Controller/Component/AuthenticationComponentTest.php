@@ -75,12 +75,13 @@ class AuthenticationComponentTest extends TestCase
         $this->identity = new Identity($this->identityData);
 
         $this->service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
-                'Authentication.Session',
-                'Authentication.Form',
+                'Authentication.Session' => [
+                    'identifier' => 'Authentication.Password',
+                ],
+                'Authentication.Form' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
         ]);
 

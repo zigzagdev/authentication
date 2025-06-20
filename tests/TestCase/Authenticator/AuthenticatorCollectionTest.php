@@ -33,7 +33,9 @@ class AuthenticatorCollectionTest extends TestCase
     {
         $identifiers = $this->createMock(IdentifierCollection::class);
         $collection = new AuthenticatorCollection($identifiers, [
-            'Authentication.Form',
+            'Authentication.Form' => [
+                'identifier' => 'Authentication.Password',
+            ],
         ]);
         $result = $collection->get('Form');
         $this->assertInstanceOf(FormAuthenticator::class, $result);
@@ -48,7 +50,9 @@ class AuthenticatorCollectionTest extends TestCase
     {
         $identifiers = $this->createMock(IdentifierCollection::class);
         $collection = new AuthenticatorCollection($identifiers);
-        $result = $collection->load('Authentication.Form');
+        $result = $collection->load('Authentication.Form', [
+            'identifier' => 'Authentication.Password',
+        ]);
         $this->assertInstanceOf(FormAuthenticator::class, $result);
     }
 
@@ -87,7 +91,9 @@ class AuthenticatorCollectionTest extends TestCase
         $collection = new AuthenticatorCollection($identifiers);
         $this->assertTrue($collection->isEmpty());
 
-        $collection->load('Authentication.Form');
+        $collection->load('Authentication.Form', [
+            'identifier' => 'Authentication.Password',
+        ]);
         $this->assertFalse($collection->isEmpty());
     }
 
