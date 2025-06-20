@@ -89,11 +89,10 @@ class AuthenticationService implements AuthenticationServiceInterface, Impersona
      * ```
      * $service = new AuthenticationService([
      *    'authenticators' => [
-     *        'Authentication.Form
+     *        'Authentication.Form' => [
+     *            'identifier' => 'Authentication.Password',
+     *        ],
      *    ],
-     *    'identifiers' => [
-     *        'Authentication.Password'
-     *    ]
      * ]);
      * ```
      *
@@ -172,7 +171,7 @@ class AuthenticationService implements AuthenticationServiceInterface, Impersona
     {
         deprecationWarning(
             '3.3.0',
-            'loadIdentifier() usage is deprecated. Directly pass Identifier to Authenticator.',
+            'loadIdentifier() usage is deprecated. Directly pass `\'identifier\'` config to the Authenticator.',
         );
 
         return $this->identifiers()->load($name, $config);

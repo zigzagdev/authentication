@@ -34,6 +34,7 @@ use Cake\Http\ServerRequestFactory;
 use Cake\I18n\DateTime;
 use Cake\Routing\Router;
 use InvalidArgumentException;
+use PHPUnit\Runner\Version;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -55,11 +56,10 @@ class AuthenticationServiceTest extends TestCase
         );
 
         $service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
-                'Authentication.Form',
+                'Authentication.Form' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
         ]);
 
@@ -121,11 +121,10 @@ class AuthenticationServiceTest extends TestCase
         ]);
 
         $service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
-                'Authentication.HttpBasic',
+                'Authentication.HttpBasic' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
         ]);
 
@@ -155,12 +154,10 @@ class AuthenticationServiceTest extends TestCase
         ]);
 
         $service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
                 'Authentication.HttpBasic' => [
                     'skipChallenge' => true,
+                    'identifier' => 'Authentication.Password',
                 ],
             ],
         ]);
@@ -190,12 +187,10 @@ class AuthenticationServiceTest extends TestCase
 
         $factory = function () {
             return new AuthenticationService([
-                'identifiers' => [
-                    'Authentication.Password',
-                ],
                 'authenticators' => [
                     'Authentication.Session' => [
                         'identify' => true,
+                        'identifier' => 'Authentication.Password',
                     ],
                 ],
             ]);
@@ -238,9 +233,16 @@ class AuthenticationServiceTest extends TestCase
      */
     public function testLoadIdentifier()
     {
-        $service = new AuthenticationService();
-        $result = $service->loadIdentifier('Authentication.Password');
-        $this->assertInstanceOf(PasswordIdentifier::class, $result);
+        $this->skipIf(
+            version_compare(Version::id(), '11.0', '<'),
+            'For some reason PHPUnit doesn\'t pick up the deprecation on v10',
+        );
+
+        $this->deprecated(function () {
+            $service = new AuthenticationService();
+            $result = $service->loadIdentifier('Authentication.Password');
+            $this->assertInstanceOf(PasswordIdentifier::class, $result);
+        });
     }
 
     /**
@@ -263,11 +265,10 @@ class AuthenticationServiceTest extends TestCase
     public function testClearIdentity()
     {
         $service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
-                'Authentication.Form',
+                'Authentication.Form' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
         ]);
 
@@ -293,11 +294,10 @@ class AuthenticationServiceTest extends TestCase
     public function testClearIdentityWithCustomIdentityAttribute()
     {
         $service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
-                'Authentication.Form',
+                'Authentication.Form' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
             'identityAttribute' => 'customIdentity',
         ]);
@@ -324,11 +324,10 @@ class AuthenticationServiceTest extends TestCase
     public function testClearIdentityWithCustomIdentityAttributeShouldPreserveDefault()
     {
         $service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
-                'Authentication.Form',
+                'Authentication.Form' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
             'identityAttribute' => 'customIdentity',
         ]);
@@ -360,11 +359,10 @@ class AuthenticationServiceTest extends TestCase
     public function testClearIdentityWithImpersonation()
     {
         $service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
-                'Authentication.Session',
+                'Authentication.Session' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
         ]);
 
@@ -394,12 +392,13 @@ class AuthenticationServiceTest extends TestCase
     public function testPersistIdentity()
     {
         $service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
-                'Authentication.Session',
-                'Authentication.Form',
+                'Authentication.Session' => [
+                    'identifier' => 'Authentication.Password',
+                ],
+                'Authentication.Form' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
         ]);
 
@@ -438,12 +437,13 @@ class AuthenticationServiceTest extends TestCase
     public function testPersistIdentityWithCustomIdentityAttribute()
     {
         $service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
-                'Authentication.Session',
-                'Authentication.Form',
+                'Authentication.Session' => [
+                    'identifier' => 'Authentication.Password',
+                ],
+                'Authentication.Form' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
             'identityAttribute' => 'customIdentity',
         ]);
@@ -485,12 +485,13 @@ class AuthenticationServiceTest extends TestCase
     public function testPersistIdentityWithCustomIdentityAttributeShouldPreserveDefault()
     {
         $service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
-                'Authentication.Session',
-                'Authentication.Form',
+                'Authentication.Session' => [
+                    'identifier' => 'Authentication.Password',
+                ],
+                'Authentication.Form' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
             'identityAttribute' => 'customIdentity',
         ]);
@@ -600,12 +601,13 @@ class AuthenticationServiceTest extends TestCase
         );
 
         $service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
-                'Authentication.Session',
-                'Authentication.Form',
+                'Authentication.Session' => [
+                    'identifier' => 'Authentication.Password',
+                ],
+                'Authentication.Form' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
         ]);
 
@@ -632,11 +634,7 @@ class AuthenticationServiceTest extends TestCase
             ['username' => 'mariano', 'password' => 'password'],
         );
 
-        $service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
-        ]);
+        $service = new AuthenticationService();
 
         $service->authenticate($request);
     }
@@ -716,11 +714,10 @@ class AuthenticationServiceTest extends TestCase
 
         $service = new AuthenticationService([
             'identityClass' => $callable,
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
-                'Authentication.Form',
+                'Authentication.Form' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
         ]);
 
@@ -744,11 +741,10 @@ class AuthenticationServiceTest extends TestCase
         );
 
         $service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
-                'Authentication.Form',
+                'Authentication.Form' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
         ]);
 
@@ -954,7 +950,9 @@ class AuthenticationServiceTest extends TestCase
 
         $service = new AuthenticationService([
             'authenticators' => [
-                'Authentication.Session',
+                'Authentication.Session' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
         ]);
         $service->authenticate($request);
@@ -988,7 +986,9 @@ class AuthenticationServiceTest extends TestCase
 
         $service = new AuthenticationService([
             'authenticators' => [
-                'Authentication.Session',
+                'Authentication.Session' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
         ]);
         $service->authenticate($request);
@@ -1013,11 +1013,10 @@ class AuthenticationServiceTest extends TestCase
         $impersonator = new ArrayObject(['username' => 'mariano']);
         $impersonated = new ArrayObject(['username' => 'larry']);
         $service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
-                'Authentication.Form',
+                'Authentication.Form' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
         ]);
 
@@ -1047,7 +1046,9 @@ class AuthenticationServiceTest extends TestCase
 
         $service = new AuthenticationService([
             'authenticators' => [
-                'Authentication.Session',
+                'Authentication.Session' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
         ]);
         $service->authenticate($request);
@@ -1076,11 +1077,10 @@ class AuthenticationServiceTest extends TestCase
         $response = new Response();
 
         $service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
-                'Authentication.Form',
+                'Authentication.Form' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
         ]);
 
@@ -1108,8 +1108,9 @@ class AuthenticationServiceTest extends TestCase
         $request->getSession()->write('AuthImpersonate', $impersonator);
         $service = new AuthenticationService([
             'authenticators' => [
-                'Authentication.Session',
-
+                'Authentication.Session' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
         ]);
         $service->authenticate($request);
@@ -1135,8 +1136,9 @@ class AuthenticationServiceTest extends TestCase
 
         $service = new AuthenticationService([
             'authenticators' => [
-                'Authentication.Session',
-
+                'Authentication.Session' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
         ]);
         $service->authenticate($request);
@@ -1158,11 +1160,10 @@ class AuthenticationServiceTest extends TestCase
         );
 
         $service = new AuthenticationService([
-            'identifiers' => [
-                'Authentication.Password',
-            ],
             'authenticators' => [
-                'Authentication.Form',
+                'Authentication.Form' => [
+                    'identifier' => 'Authentication.Password',
+                ],
             ],
         ]);
 

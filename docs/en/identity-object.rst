@@ -108,10 +108,9 @@ that implements the required interface::
    // Then pass it to the service configuration
    $service = new AuthenticationService([
        'identityClass' => $identityResolver,
-       'identifiers' => [
-           'Authentication.Password'
-       ],
        'authenticators' => [
-           'Authentication.Form'
+           'Authentication.Form' => [
+               'identifier' => 'Authentication.Password',
+           ],
        ]
    ]);
