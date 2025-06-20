@@ -63,7 +63,12 @@ class TokenAuthenticator extends AbstractAuthenticator implements StatelessInter
      */
     protected function stripTokenPrefix(string $token, string $prefix): string
     {
-        return trim(str_ireplace($prefix, '', $token));
+        $prefixLength = mb_strlen($prefix);
+        if (mb_substr(mb_strtolower($token), 0, $prefixLength) === mb_strtolower($prefix)) {
+            $token = mb_substr($token, $prefixLength);
+        }
+
+        return trim($token);
     }
 
     /**
