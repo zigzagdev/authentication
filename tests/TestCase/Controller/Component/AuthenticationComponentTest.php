@@ -27,10 +27,12 @@ use Authentication\IdentityInterface;
 use Authentication\Test\TestCase\AuthenticationTestCase as TestCase;
 use Cake\Controller\ComponentRegistry;
 use Cake\Controller\Controller;
+use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\Event\EventManager;
 use Cake\Http\ServerRequestFactory;
 use Cake\ORM\Entity;
+use Cake\Routing\Router;
 use InvalidArgumentException;
 use TestApp\Authentication\InvalidAuthenticationService;
 use UnexpectedValueException;
@@ -357,18 +359,33 @@ class AuthenticationComponentTest extends TestCase
      */
     public function testGetLoginRedirect()
     {
+        Configure::write('App.base', '/cakephp');
+        $url = ['controller' => 'Users', 'action' => 'dashboard'];
+        Router::createRouteBuilder('/')
+            ->connect('/dashboard', $url);
+
         $this->service->setConfig('queryParam', 'redirect');
         $request = $this->request
             ->withAttribute('identity', $this->identity)
-            ->withAttribute('authentication', $this->service)
-            ->withQueryParams(['redirect' => 'ok/path?value=key']);
+            ->withAttribute('authentication', $this->service);
 
         $controller = new Controller($request);
         $registry = new ComponentRegistry($controller);
         $component = new AuthenticationComponent($registry);
 
-        $result = $component->getLoginRedirect();
+        $result = $component->getLoginRedirect($url);
+        $this->assertSame('/dashboard', $result);
+
+        $request = $request->withQueryParams(['redirect' => 'ok/path?value=key']);
+
+        $controller = new Controller($request);
+        $registry = new ComponentRegistry($controller);
+        $component = new AuthenticationComponent($registry);
+
+        $result = $component->getLoginRedirect($url);
         $this->assertSame('/ok/path?value=key', $result);
+
+        Configure::delete('App.base');
     }
 
     /**
