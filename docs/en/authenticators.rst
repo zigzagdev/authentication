@@ -26,6 +26,36 @@ Configuration options:
    identifier in your user storage. Defaults to ``username``. This option is
    used when the ``identify`` option is set to true.
 
+PrimaryKeySession
+=================
+
+This is an improved version of Session that will only store the primary key.
+This way the data will always be fetched fresh from the DB and issues like
+having to update the identity when updating account data should be gone.
+
+It also helps to avoid session invalidation.
+Session itself stores the entity object including nested objects like DateTime or enums.
+With only the ID stored, the invalidation due to objects being modified will also dissolve.
+
+Make sure to match this with a Token identifier with ``key``/``id`` keys::
+
+    $service->loadAuthenticator('Authentication.PrimaryKeySession', [
+        'identifier' => [
+            'Authentication.Token' => [
+                'tokenField' => 'id', // lookup for resolver and DB table
+                'dataField' => 'key', // incoming data from authenticator
+                'resolver' => 'Authentication.Orm',
+            ],
+        ],
+        'urlChecker' => 'Authentication.CakeRouter',
+        'loginUrl' => [
+            'prefix' => false,
+            'plugin' => false,
+            'controller' => 'Users',
+            'action' => 'login',
+        ],
+    ]);
+
 Form
 ====
 
