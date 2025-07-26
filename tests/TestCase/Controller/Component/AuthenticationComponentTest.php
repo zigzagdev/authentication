@@ -214,6 +214,11 @@ class AuthenticationComponentTest extends TestCase
         $component->setIdentity($this->identityData);
         $result = $component->getIdentity();
         $this->assertSame($this->identityData, $result->getOriginalData());
+
+        $identityData = ['id' => 99];
+        $component->setIdentity($identityData);
+        $result = $component->getIdentity();
+        $this->assertSame($identityData, $result->getOriginalData());
     }
 
     /**

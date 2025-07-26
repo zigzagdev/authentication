@@ -300,10 +300,10 @@ class AuthenticationComponent extends Component implements EventDispatcherInterf
      * is cleared and then set to ensure that privilege escalation
      * and de-escalation include side effects like session rotation.
      *
-     * @param \ArrayAccess $identity Identity data to persist.
+     * @param \ArrayAccess|array $identity Identity data to persist.
      * @return $this
      */
-    public function setIdentity(ArrayAccess $identity)
+    public function setIdentity(ArrayAccess|array $identity)
     {
         $controller = $this->getController();
         $service = $this->getAuthenticationService();
