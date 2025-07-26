@@ -21,6 +21,7 @@ use Authentication\Authenticator\Result;
 use Authentication\Identifier\IdentifierCollection;
 use Authentication\Test\TestCase\AuthenticationTestCase as TestCase;
 use Cake\Http\ServerRequestFactory;
+use Cake\Routing\Router;
 use RuntimeException;
 
 class EnvironmentAuthenticatorTest extends TestCase
@@ -261,10 +262,13 @@ class EnvironmentAuthenticatorTest extends TestCase
      */
     public function testMultipleLoginUrlMismatch()
     {
+        Router::createRouteBuilder('/')
+            ->connect('/{lang}/secure', ['controller' => 'Users', 'action' => 'login']);
+
         $envAuth = new EnvironmentAuthenticator($this->identifiers, [
             'loginUrl' => [
-                '/en/secure',
-                '/de/secure',
+                ['lang' => 'en', 'controller' => 'Users', 'action' => 'login'],
+                ['lang' => 'de', 'controller' => 'Users', 'action' => 'login'],
             ],
             'fields' => [
                 'USER_ID',
