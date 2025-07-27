@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace Authentication\Authenticator;
 
 use Authentication\UrlChecker\UrlCheckerTrait;
+use Cake\Routing\Router;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
@@ -114,11 +115,18 @@ class EnvironmentAuthenticator extends AbstractAuthenticator
             $uri = $uri->getPath();
         }
 
+        $loginUrls = (array)$this->getConfig('loginUrl');
+        foreach ($loginUrls as $key => $loginUrl) {
+            if (is_array($loginUrl)) {
+                $loginUrls[$key] = Router::url($loginUrl);
+            }
+        }
+
         $errors = [
             sprintf(
                 'Login URL `%s` did not match `%s`.',
                 $uri,
-                implode('` or `', (array)$this->getConfig('loginUrl')),
+                implode('` or `', $loginUrls),
             ),
         ];
 

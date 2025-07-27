@@ -21,6 +21,7 @@ use Authentication\Authenticator\Result;
 use Authentication\Identifier\IdentifierCollection;
 use Authentication\Test\TestCase\AuthenticationTestCase as TestCase;
 use Cake\Http\ServerRequestFactory;
+use Cake\Routing\Router;
 use RuntimeException;
 
 class FormAuthenticatorTest extends TestCase
@@ -156,10 +157,14 @@ class FormAuthenticatorTest extends TestCase
             ['username' => 'mariano', 'password' => 'password'],
         );
 
+        Router::createRouteBuilder('/')
+            ->connect('/{lang}/users/login', ['controller' => 'Users', 'action' => 'login']);
+
         $form = new FormAuthenticator($identifiers, [
+            'urlChecker' => 'Authentication.CakeRouter',
             'loginUrl' => [
-                '/en/users/login',
-                '/de/users/login',
+                ['lang' => 'en', 'controller' => 'Users', 'action' => 'login'],
+                ['lang' => 'de', 'controller' => 'Users', 'action' => 'login'],
             ],
         ]);
 
