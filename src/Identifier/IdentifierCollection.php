@@ -69,7 +69,7 @@ class IdentifierCollection extends AbstractCollection implements IdentifierInter
      *
      * @param \Authentication\Identifier\IdentifierInterface|class-string<\Authentication\Identifier\IdentifierInterface> $class Identifier class.
      * @param string $alias Identifier alias.
-     * @param array $config Config array.
+     * @param array<string, mixed> $config Config array.
      * @return \Authentication\Identifier\IdentifierInterface
      * @throws \RuntimeException
      */

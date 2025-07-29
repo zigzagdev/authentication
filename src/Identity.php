@@ -51,7 +51,7 @@ class Identity implements IdentityInterface
      * Constructor
      *
      * @param \ArrayAccess|array $data Identity data
-     * @param array $config Config options
+     * @param array<string, mixed> $config Config options
      */
     public function __construct(ArrayAccess|array $data, array $config = [])
     {

@@ -38,7 +38,7 @@ class AuthenticatorCollection extends AbstractCollection
      * Constructor.
      *
      * @param \Authentication\Identifier\IdentifierCollection $identifiers Identifiers collection.
-     * @param array $config Config array.
+     * @param array<string, mixed> $config Config array.
      */
     public function __construct(IdentifierCollection $identifiers, array $config = [])
     {
@@ -58,7 +58,7 @@ class AuthenticatorCollection extends AbstractCollection
      *
      * @param \Authentication\Authenticator\AuthenticatorInterface|class-string<\Authentication\Authenticator\AuthenticatorInterface> $class Authenticator class.
      * @param string $alias Authenticator alias.
-     * @param array $config Config array.
+     * @param array<string, mixed> $config Config array.
      * @return \Authentication\Authenticator\AuthenticatorInterface
      * @throws \RuntimeException
      */

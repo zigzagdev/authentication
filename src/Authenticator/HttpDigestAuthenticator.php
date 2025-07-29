@@ -56,7 +56,7 @@ class HttpDigestAuthenticator extends HttpBasicAuthenticator
      *    Defaults to `md5($config['realm'])`
      *
      * @param \Authentication\Identifier\IdentifierInterface $identifier Identifier instance.
-     * @param array $config Configuration settings.
+     * @param array<string, mixed> $config Configuration settings.
      */
     public function __construct(IdentifierInterface $identifier, array $config = [])
     {
