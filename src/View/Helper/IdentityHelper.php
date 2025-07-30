@@ -49,7 +49,7 @@ class IdentityHelper extends Helper
      *
      * Implement this method to avoid having to overwrite the constructor and call parent.
      *
-     * @param array $config The configuration settings provided to this helper.
+     * @param array<string, mixed> $config The configuration settings provided to this helper.
      * @return void
      */
     public function initialize(array $config): void

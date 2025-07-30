@@ -83,7 +83,7 @@ class AuthenticationComponent extends Component implements EventDispatcherInterf
     /**
      * Initialize component.
      *
-     * @param array $config The config data.
+     * @param array<string, mixed> $config The config data.
      * @return void
      */
     public function initialize(array $config): void

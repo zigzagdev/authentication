@@ -36,7 +36,7 @@ abstract class AbstractPasswordHasher implements PasswordHasherInterface
     /**
      * Constructor
      *
-     * @param array $config Array of config.
+     * @param array<string, mixed> $config Array of config.
      */
     public function __construct(array $config = [])
     {

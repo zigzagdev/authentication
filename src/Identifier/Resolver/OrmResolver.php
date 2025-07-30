@@ -43,7 +43,7 @@ class OrmResolver implements ResolverInterface
     /**
      * Constructor.
      *
-     * @param array $config Config array.
+     * @param array<string, mixed> $config Config array.
      */
     public function __construct(array $config = [])
     {

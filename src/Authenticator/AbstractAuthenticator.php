@@ -49,7 +49,7 @@ abstract class AbstractAuthenticator implements AuthenticatorInterface
      * Constructor
      *
      * @param \Authentication\Identifier\IdentifierInterface $identifier Identifier or identifiers collection.
-     * @param array $config Configuration settings.
+     * @param array<string, mixed> $config Configuration settings.
      */
     public function __construct(IdentifierInterface $identifier, array $config = [])
     {
