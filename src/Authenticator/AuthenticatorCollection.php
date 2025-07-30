@@ -67,11 +67,6 @@ class AuthenticatorCollection extends AbstractCollection
         if (is_string($class)) {
             if (!empty($config['identifier'])) {
                 $this->_identifiers = new IdentifierCollection((array)$config['identifier']);
-            } else {
-                deprecationWarning(
-                    '3.3.0',
-                    'loadIdentifier() usage is deprecated. Directly pass `\'identifier\'` config to the Authenticator.',
-                );
             }
 
             return new $class($this->_identifiers, $config);
