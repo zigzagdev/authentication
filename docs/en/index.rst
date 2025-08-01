@@ -203,7 +203,7 @@ Next we'll add a view template for our login form::
             <?= $this->Form->control('email') ?>
             <?= $this->Form->control('password') ?>
         </fieldset>
-        <?= $this->Form->button(__('Login')); ?>
+        <?= $this->Form->button(__('Login')) ?>
         <?= $this->Form->end() ?>
     </div>
 
