@@ -47,7 +47,8 @@ fallback hasher as follows::
             'passwordHasher' => [
                 'className' => 'Authentication.Fallback',
                 'hashers' => [
-                    'Authentication.Default' => [
+                    'Authentication.Default',
+                    [
                         'className' => 'Authentication.Legacy',
                         'hashType' => 'md5',
                         'salt' => false, // turn off default usage of salt
@@ -68,8 +69,7 @@ password needs to be upgraded::
 
        // regardless of POST or GET, redirect if user is logged in
        if ($result->isValid()) {
-           // Assuming you are using the `Password` identifier.
-           if ($authentication->identifiers()->get('Password')->needsPasswordRehash()) {
+           if ($authentication->getIdentificationProvider()->needsPasswordRehash()) {
                // Rehash happens on save.
                $user = $this->Users->get($authentication->getIdentity()->getIdentifier());
                $user->password = $this->request->getData('password');
