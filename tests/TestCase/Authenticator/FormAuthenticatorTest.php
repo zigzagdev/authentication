@@ -112,6 +112,27 @@ class FormAuthenticatorTest extends TestCase
         $this->assertEquals([0 => 'Login credentials not found'], $result->getErrors());
     }
 
+    public function testIdentityNotFound()
+    {
+        $identifiers = new IdentifierCollection([
+           'Authentication.Password',
+        ]);
+
+        $request = ServerRequestFactory::fromGlobals(
+            ['REQUEST_URI' => '/users/does-not-match'],
+            [],
+            ['username' => 'non-existent', 'password' => 'password'],
+        );
+
+        $form = new FormAuthenticator($identifiers);
+
+        $result = $form->authenticate($request);
+
+        $this->assertInstanceOf(Result::class, $result);
+        $this->assertSame(Result::FAILURE_IDENTITY_NOT_FOUND, $result->getStatus());
+        $this->assertSame([], $result->getErrors());
+    }
+
     /**
      * testSingleLoginUrlMismatch
      *
