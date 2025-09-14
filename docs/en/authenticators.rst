@@ -175,6 +175,8 @@ Add the following to your ``Application`` class::
             'algorithm' => 'RS256',
             'returnPayload' => false
         ]);
+
+        return $service;
     }
 
 In your ``UsersController``::
