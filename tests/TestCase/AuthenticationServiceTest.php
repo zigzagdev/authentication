@@ -847,6 +847,22 @@ class AuthenticationServiceTest extends TestCase
         );
     }
 
+    public function testGetUnauthenticatedRedirectUrlForPost()
+    {
+        $service = new AuthenticationService();
+        $service->setConfig('unauthenticatedRedirect', '/users/login');
+        $service->setConfig('queryParam', 'redirect');
+
+        $request = ServerRequestFactory::fromGlobals(
+            ['REQUEST_URI' => '/secrets', 'REQUEST_METHOD' => 'POST'],
+        );
+        $this->assertSame(
+            '/users/login',
+            $service->getUnauthenticatedRedirectUrl($request),
+            'Redirect query param should be only set for GET requests',
+        );
+    }
+
     public function testGetUnauthenticatedRedirectUrlAsArray()
     {
         Router::fullBaseUrl('http://localhost');
