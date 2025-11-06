@@ -383,14 +383,20 @@ class AuthenticationService implements AuthenticationServiceInterface, Impersona
      */
     public function getUnauthenticatedRedirectUrl(ServerRequestInterface $request): ?string
     {
-        $param = $this->getConfig('queryParam');
         $target = $this->getConfig('unauthenticatedRedirect');
         if ($target === null) {
             return null;
         }
+
         if (is_array($target) && class_exists(Router::class)) {
             $target = Router::url($target);
         }
+
+        if ($request->getMethod() !== 'GET') {
+            return $target;
+        }
+
+        $param = $this->getConfig('queryParam');
         if ($param === null) {
             return $target;
         }
