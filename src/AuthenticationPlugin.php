@@ -20,7 +20,7 @@ use Cake\Core\BasePlugin;
 /**
  * Plugin class for CakePHP.
  */
-class Plugin extends BasePlugin
+class AuthenticationPlugin extends BasePlugin
 {
     /**
      * Do bootstrapping or not
