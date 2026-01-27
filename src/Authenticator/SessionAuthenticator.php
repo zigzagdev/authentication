@@ -33,8 +33,7 @@ class SessionAuthenticator extends AbstractAuthenticator implements PersistenceI
      * - `fields` The fields to use to verify a user by.
      * - `sessionKey` Session key.
      * - `identify` Whether to identify user data stored in a session.
-     *   Deprecated: This option only verifies that the username exists in the database,
-     *   it does not verify passwords. Use `PrimaryKeySessionAuthenticator` instead if you
+     *   Deprecated: Use `PrimaryKeySessionAuthenticator` instead if you
      *   need to fetch fresh user data from the database on each request.
      *
      * @var array
@@ -70,7 +69,6 @@ class SessionAuthenticator extends AbstractAuthenticator implements PersistenceI
             deprecationWarning(
                 '3.4.0',
                 'The `identify` option is deprecated. ' .
-                'This option only verifies that the username exists, not the password. ' .
                 'Use `PrimaryKeySessionAuthenticator` instead to fetch fresh user data on each request.',
             );
             $credentials = [];

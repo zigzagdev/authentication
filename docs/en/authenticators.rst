@@ -18,9 +18,7 @@ Configuration options:
 
 -  **sessionKey**: The session key for the user data, default is
    ``Auth``
--  **identify**: Deprecated in 3.4.0. This option only verifies that the
-   username exists in the database, it does not verify passwords as the
-   documentation previously suggested. Use ``PrimaryKeySessionAuthenticator``
+-  **identify**: Deprecated in 3.4.0. Use ``PrimaryKeySessionAuthenticator``
    instead if you need to fetch fresh user data from the database on each request.
 -  **fields**: Allows you to map the ``username`` field to the unique
    identifier in your user storage. Defaults to ``username``.
