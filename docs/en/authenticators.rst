@@ -18,13 +18,10 @@ Configuration options:
 
 -  **sessionKey**: The session key for the user data, default is
    ``Auth``
--  **identify**: Set this key with a value of bool ``true`` to enable checking
-   the session credentials against the identifiers. When ``true``, the configured
-   :doc:`/identifiers` are used to identify the user using data
-   stored in the session on each request. Default value is ``false``.
+-  **identify**: Deprecated in 3.4.0. Use ``PrimaryKeySessionAuthenticator``
+   instead if you need to fetch fresh user data from the database on each request.
 -  **fields**: Allows you to map the ``username`` field to the unique
-   identifier in your user storage. Defaults to ``username``. This option is
-   used when the ``identify`` option is set to true.
+   identifier in your user storage. Defaults to ``username``.
 
 PrimaryKeySession
 =================

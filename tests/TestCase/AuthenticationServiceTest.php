@@ -172,9 +172,15 @@ class AuthenticationServiceTest extends TestCase
      * Integration test for session auth + identify always getting a fresh user record.
      *
      * @return void
+     * @deprecated The `identify` option is deprecated.
      */
     public function testAuthenticationWithSessionIdentify()
     {
+        $this->skipIf(
+            version_compare(Version::id(), '11.0', '<'),
+            'For some reason PHPUnit doesn\'t pick up the deprecation on v10',
+        );
+
         $users = $this->fetchTable('Users');
         $user = $users->get(1);
 
@@ -197,25 +203,28 @@ class AuthenticationServiceTest extends TestCase
                 ],
             ]);
         };
-        $service = $factory();
-        $result = $service->authenticate($request);
-        $this->assertTrue($result->isValid());
 
-        $dateValue = new DateTime('2022-01-01 10:11:12');
-        $identity = $result->getData();
-        $this->assertEquals($identity->username, $user->username);
-        $this->assertNotEquals($identity->created, $dateValue);
+        $this->deprecated(function () use ($factory, $request, $users, $user) {
+            $service = $factory();
+            $result = $service->authenticate($request);
+            $this->assertTrue($result->isValid());
 
-        // Update the user so that we can ensure session is reading from the db.
-        $user->created = $dateValue;
-        $users->saveOrFail($user);
+            $dateValue = new DateTime('2022-01-01 10:11:12');
+            $identity = $result->getData();
+            $this->assertEquals($identity->username, $user->username);
+            $this->assertNotEquals($identity->created, $dateValue);
 
-        $service = $factory();
-        $result = $service->authenticate($request);
-        $this->assertTrue($result->isValid());
-        $identity = $result->getData();
-        $this->assertEquals($identity->username, $user->username);
-        $this->assertEquals($identity->created, $dateValue);
+            // Update the user so that we can ensure session is reading from the db.
+            $user->created = $dateValue;
+            $users->saveOrFail($user);
+
+            $service = $factory();
+            $result = $service->authenticate($request);
+            $this->assertTrue($result->isValid());
+            $identity = $result->getData();
+            $this->assertEquals($identity->username, $user->username);
+            $this->assertEquals($identity->created, $dateValue);
+        });
     }
 
     /**

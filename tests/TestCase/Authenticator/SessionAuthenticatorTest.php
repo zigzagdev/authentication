@@ -27,6 +27,7 @@ use Cake\Http\Response;
 use Cake\Http\ServerRequestFactory;
 use Cake\Http\Session;
 use Cake\ORM\TableRegistry;
+use PHPUnit\Runner\Version;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -203,9 +204,15 @@ class SessionAuthenticatorTest extends TestCase
      * Test successful session data verification by database lookup
      *
      * @return void
+     * @deprecated The `identify` option is deprecated.
      */
     public function testVerifyByDatabaseSuccess()
     {
+        $this->skipIf(
+            version_compare(Version::id(), '11.0', '<'),
+            'For some reason PHPUnit doesn\'t pick up the deprecation on v10',
+        );
+
         $request = ServerRequestFactory::fromGlobals(['REQUEST_URI' => '/']);
 
         $this->sessionMock->expects($this->once())
@@ -221,19 +228,27 @@ class SessionAuthenticatorTest extends TestCase
         $authenticator = new SessionAuthenticator($this->identifiers, [
             'identify' => true,
         ]);
-        $result = $authenticator->authenticate($request);
+        $this->deprecated(function () use ($authenticator, $request) {
+            $result = $authenticator->authenticate($request);
 
-        $this->assertInstanceOf(Result::class, $result);
-        $this->assertSame(Result::SUCCESS, $result->getStatus());
+            $this->assertInstanceOf(Result::class, $result);
+            $this->assertSame(Result::SUCCESS, $result->getStatus());
+        });
     }
 
     /**
      * Test session data verification by database lookup failure
      *
      * @return void
+     * @deprecated The `identify` option is deprecated.
      */
     public function testVerifyByDatabaseFailure()
     {
+        $this->skipIf(
+            version_compare(Version::id(), '11.0', '<'),
+            'For some reason PHPUnit doesn\'t pick up the deprecation on v10',
+        );
+
         $request = ServerRequestFactory::fromGlobals(['REQUEST_URI' => '/']);
 
         $this->sessionMock->expects($this->once())
@@ -249,10 +264,12 @@ class SessionAuthenticatorTest extends TestCase
         $authenticator = new SessionAuthenticator($this->identifiers, [
             'identify' => true,
         ]);
-        $result = $authenticator->authenticate($request);
+        $this->deprecated(function () use ($authenticator, $request) {
+            $result = $authenticator->authenticate($request);
 
-        $this->assertInstanceOf(Result::class, $result);
-        $this->assertSame(Result::FAILURE_CREDENTIALS_INVALID, $result->getStatus());
+            $this->assertInstanceOf(Result::class, $result);
+            $this->assertSame(Result::FAILURE_CREDENTIALS_INVALID, $result->getStatus());
+        });
     }
 
     /**
